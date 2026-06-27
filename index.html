@@ -290,29 +290,10 @@
   }
 
   /* ── MANUAL STATUS UPDATE ── */
-  .status-toggle-row {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    gap: 12px;
+  .status-last-row {
+    text-align: center;
     margin-top: 14px;
-    flex-wrap: wrap;
   }
-  .status-toggle-btn {
-    font-family: 'Special Elite', cursive;
-    font-size: 12px;
-    letter-spacing: 0.06em;
-    color: var(--sky);
-    background: transparent;
-    border: 1.5px dashed var(--sky);
-    border-radius: 20px;
-    padding: 7px 16px;
-    cursor: pointer;
-    transition: all 0.2s;
-  }
-  .status-toggle-btn:hover { background: rgba(74,127,165,0.12); color: var(--paper); }
-  .status-toggle-btn.active { background: var(--sky); color: #06151f; border-style: solid; }
-
   .status-last {
     font-family: 'Special Elite', cursive;
     font-size: 11px;
@@ -321,13 +302,39 @@
   }
   .status-last strong { color: var(--sage); }
 
+  .status-section {
+    max-width: 480px;
+    margin: 0 auto;
+    padding: 0 20px 8px;
+    text-align: center;
+  }
+  .status-section-inner { display: flex; flex-direction: column; align-items: center; }
+
+  .status-toggle-btn {
+    font-family: 'Special Elite', cursive;
+    font-size: 10.5px;
+    letter-spacing: 0.04em;
+    color: var(--muted);
+    background: transparent;
+    border: 1px dotted #3a3833;
+    border-radius: 16px;
+    padding: 5px 12px;
+    cursor: pointer;
+    transition: all 0.2s;
+    opacity: 0.7;
+  }
+  .status-toggle-btn:hover { opacity: 1; color: var(--sky); border-color: var(--sky); }
+  .status-toggle-btn.active { opacity: 1; background: rgba(74,127,165,0.12); color: var(--sky); border-style: solid; }
+
   .status-panel {
     display: none;
     margin-top: 14px;
+    width: 100%;
     background: #1f1e1a;
     border: 1px solid #3a3833;
     border-radius: 8px;
     padding: 16px;
+    text-align: left;
   }
   .status-panel.open { display: block; }
 
@@ -945,26 +952,8 @@
         <span>Norwood</span>
       </div>
     </div>
-
-    <!-- MANUAL STATUS UPDATE -->
-    <div class="status-toggle-row">
-      <button class="status-toggle-btn" id="statusToggleBtn">📍 Post a Status Update</button>
+    <div class="status-last-row">
       <span class="status-last" id="statusLast"></span>
-    </div>
-    <div class="status-panel" id="statusPanel">
-      <div class="status-field">
-        <label for="statusLocation">Where are you right now?</label>
-        <input type="text" id="statusLocation" placeholder="e.g. Just past Amarillo, fuel stop">
-      </div>
-      <div class="status-field">
-        <label for="statusNote">Note (delays, route change, anything)</label>
-        <textarea id="statusNote" placeholder="e.g. Running 2 hrs behind, skipping Cadillac Ranch, pushing straight to Tulsa"></textarea>
-      </div>
-      <div class="status-actions">
-        <button class="status-save-btn" id="statusSaveBtn">Post Update</button>
-        <button class="status-clear-btn" id="statusClearBtn">Clear Log</button>
-      </div>
-      <div class="status-log" id="statusLog"></div>
     </div>
   </div>
 </section>
@@ -1388,6 +1377,28 @@
   </div>
 </section>
 
+<!-- DRIVER STATUS UPDATE (tucked away, not for casual viewers) -->
+<section class="status-section">
+  <div class="status-section-inner">
+    <button class="status-toggle-btn" id="statusToggleBtn">For the crew: post a status update</button>
+    <div class="status-panel" id="statusPanel">
+      <div class="status-field">
+        <label for="statusLocation">Where are you right now?</label>
+        <input type="text" id="statusLocation" placeholder="e.g. Just past Amarillo, fuel stop">
+      </div>
+      <div class="status-field">
+        <label for="statusNote">Note (delays, route change, anything)</label>
+        <textarea id="statusNote" placeholder="e.g. Running 2 hrs behind, skipping Cadillac Ranch, pushing straight to Tulsa"></textarea>
+      </div>
+      <div class="status-actions">
+        <button class="status-save-btn" id="statusSaveBtn">Post Update</button>
+        <button class="status-clear-btn" id="statusClearBtn">Clear Log</button>
+      </div>
+      <div class="status-log" id="statusLog"></div>
+    </div>
+  </div>
+</section>
+
 <footer>
   Theatre On Ice National Competition 2026 · Irvine, CA → Norwood, MA · ~3,185 miles · 4 Days / 3 Nights (via Chicago)
 </footer>
@@ -1690,7 +1701,7 @@
   statusToggleBtn.addEventListener('click', () => {
     const isOpen = statusPanel.classList.toggle('open');
     statusToggleBtn.classList.toggle('active', isOpen);
-    statusToggleBtn.textContent = isOpen ? '📍 Hide Status Panel' : '📍 Post a Status Update';
+    statusToggleBtn.textContent = isOpen ? 'Hide status form' : 'For the crew: post a status update';
   });
 
   statusSaveBtn.addEventListener('click', async () => {
