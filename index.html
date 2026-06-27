@@ -1647,21 +1647,56 @@
   // Approximate cumulative-mileage checkpoints along the actual route, used to translate
   // a free-text status update ("Tulsa, OK" / "stopped in Springfield") into a progress-bar position.
   // pct is rough — based on cumulative miles from Irvine (0%) to Norwood (100%) along the real route.
+  // Listed in route order; when a free-text match is ambiguous (e.g. "Springfield" exists twice),
+  // the more specific term (with state) should be checked first by matchRouteCheckpoint.
   const routeCheckpoints = [
-    { match: ['irvine'],                          pct: 0 },
-    { match: ['yuma'],                            pct: 8 },
-    { match: ['tucson'],                          pct: 14 },
-    { match: ['roswell'],                         pct: 24 },
-    { match: ['glenrio'],                         pct: 32 },
-    { match: ['amarillo'],                        pct: 34 },
-    { match: ['oklahoma city', 'okc'],            pct: 42 },
-    { match: ['tulsa'],                           pct: 47 },
-    { match: ['springfield'],                     pct: 58 },
-    { match: ['chicago'],                         pct: 63 },
-    { match: ['columbus'],                        pct: 80 },
-    { match: ['kutztown', 'crystal cave'],         pct: 92 },
+    // Day 1 — Irvine to Roswell (I-10 E, US-285 N)
+    { match: ['irvine'],                                    pct: 0 },
+    { match: ['palm springs'],                               pct: 4 },
+    { match: ['blythe'],                                     pct: 6 },
+    { match: ['yuma'],                                       pct: 8 },
+    { match: ['casa grande'],                                pct: 11 },
+    { match: ['tucson'],                                     pct: 14 },
+    { match: ['benson'],                                     pct: 16 },
+    { match: ['las cruces'],                                 pct: 19 },
+    { match: ['alamogordo'],                                 pct: 21 },
+    { match: ['roswell'],                                    pct: 24 },
+
+    // Day 2 — Roswell to Tulsa (US-70 E, I-40 E, I-44 E)
+    { match: ['clovis'],                                     pct: 28 },
+    { match: ['glenrio'],                                    pct: 32 },
+    { match: ['amarillo'],                                   pct: 34 },
+    { match: ['shamrock'],                                   pct: 36 },
+    { match: ['elk city'],                                   pct: 38 },
+    { match: ['oklahoma city', 'okc'],                       pct: 42 },
+    { match: ['stroud'],                                     pct: 44 },
+    { match: ['tulsa'],                                      pct: 47 },
+
+    // Day 3 — Tulsa to Columbus, the long one (I-44 E, I-55 N, I-90/I-80, I-71 S)
+    { match: ['joplin'],                                     pct: 50 },
+    { match: ['springfield, mo', 'springfield mo'],           pct: 53 },
+    { match: ['rolla'],                                      pct: 56 },
+    { match: ['st. louis', 'saint louis', 'st louis'],        pct: 58 },
+    { match: ['springfield, il', 'springfield il', 'springfield'], pct: 60 },
+    { match: ['bloomington'],                                pct: 62 },
+    { match: ['chicago'],                                    pct: 64 },
+    { match: ['gary'],                                       pct: 67 },
+    { match: ['south bend'],                                 pct: 70 },
+    { match: ['toledo'],                                     pct: 74 },
+    { match: ['cleveland'],                                  pct: 77 },
+    { match: ['columbus'],                                   pct: 80 },
+
+    // Day 4 — Columbus to Norwood (I-70 E, I-76 E, I-78 E, I-95 N)
+    { match: ['wheeling'],                                   pct: 84 },
+    { match: ['pittsburgh'],                                 pct: 86 },
+    { match: ['harrisburg'],                                 pct: 89 },
+    { match: ['allentown'],                                  pct: 91 },
+    { match: ['kutztown', 'crystal cave'],                   pct: 92 },
     { match: ['delaware water gap', 'columbia, nj', 'columbia nj'], pct: 96 },
-    { match: ['norwood'],                         pct: 100 }
+    { match: ['scranton'],                                   pct: 96 },
+    { match: ['hartford'],                                   pct: 98 },
+    { match: ['providence'],                                 pct: 99 },
+    { match: ['norwood'],                                    pct: 100 }
   ];
 
   // Find the best-matching checkpoint for a free-text location string.
@@ -1670,12 +1705,20 @@
     if (!locationText) return null;
     const lower = locationText.toLowerCase();
     let best = null;
+    let bestTermLength = 0;
     for (const cp of routeCheckpoints) {
       for (const term of cp.match) {
         if (lower.includes(term)) {
-          // prefer the checkpoint furthest along the route if multiple terms match
-          // (e.g. "left Tulsa, headed to Chicago" mentions both — take the later one)
-          if (!best || cp.pct > best.pct) best = cp;
+          // Prefer the most specific (longest) matching term first — this is what makes
+          // "Springfield, MO" correctly win over the bare "springfield" entry (which is
+          // mapped to Springfield, IL, since that's the one on the planned itinerary).
+          // If specificity ties, prefer the checkpoint furthest along the route, since
+          // someone typing two place names usually means they've moved past the first one
+          // (e.g. "left Tulsa, headed to Chicago").
+          if (!best || term.length > bestTermLength || (term.length === bestTermLength && cp.pct > best.pct)) {
+            best = cp;
+            bestTermLength = term.length;
+          }
         }
       }
     }
