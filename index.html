@@ -241,6 +241,22 @@
   }
   .tracker-msg strong { color: var(--stripe); }
 
+  .tracker-override {
+    width: 100%;
+    margin-top: 10px;
+    padding-top: 10px;
+    border-top: 1px dashed #3a3833;
+    font-family: 'Special Elite', cursive;
+    font-size: 12px;
+    color: var(--sage);
+    line-height: 1.5;
+  }
+  .tracker-override strong { color: var(--paper); }
+  .tracker-override-time {
+    color: var(--muted);
+    font-size: 11px;
+  }
+
   .tracker-progress { margin-top: 14px; }
   .tracker-progress-track {
     height: 6px;
@@ -1628,9 +1644,51 @@
     { day: 4, date: "2026-07-01", route: "Columbus → Norwood",             meta: "640 mi · I-70 E → I-76 E → I-78 E → I-95 N · ~10 hrs towing" }
   ];
 
+  // Approximate cumulative-mileage checkpoints along the actual route, used to translate
+  // a free-text status update ("Tulsa, OK" / "stopped in Springfield") into a progress-bar position.
+  // pct is rough — based on cumulative miles from Irvine (0%) to Norwood (100%) along the real route.
+  const routeCheckpoints = [
+    { match: ['irvine'],                          pct: 0 },
+    { match: ['yuma'],                            pct: 8 },
+    { match: ['tucson'],                          pct: 14 },
+    { match: ['roswell'],                         pct: 24 },
+    { match: ['glenrio'],                         pct: 32 },
+    { match: ['amarillo'],                        pct: 34 },
+    { match: ['oklahoma city', 'okc'],            pct: 42 },
+    { match: ['tulsa'],                           pct: 47 },
+    { match: ['springfield'],                     pct: 58 },
+    { match: ['chicago'],                         pct: 63 },
+    { match: ['columbus'],                        pct: 80 },
+    { match: ['kutztown', 'crystal cave'],         pct: 92 },
+    { match: ['delaware water gap', 'columbia, nj', 'columbia nj'], pct: 96 },
+    { match: ['norwood'],                         pct: 100 }
+  ];
+
+  // Find the best-matching checkpoint for a free-text location string.
+  // Returns null if nothing matches, so callers can fall back to the date-based plan.
+  function matchRouteCheckpoint(locationText) {
+    if (!locationText) return null;
+    const lower = locationText.toLowerCase();
+    let best = null;
+    for (const cp of routeCheckpoints) {
+      for (const term of cp.match) {
+        if (lower.includes(term)) {
+          // prefer the checkpoint furthest along the route if multiple terms match
+          // (e.g. "left Tulsa, headed to Chicago" mentions both — take the later one)
+          if (!best || cp.pct > best.pct) best = cp;
+        }
+      }
+    }
+    return best;
+  }
+
   function ymd(d) {
     return d.getFullYear() + '-' + String(d.getMonth() + 1).padStart(2, '0') + '-' + String(d.getDate()).padStart(2, '0');
   }
+
+  // Holds the most recent status update fetched from Supabase, so renderTracker()
+  // can use it to override the planned progress position. Set by renderStatusLog().
+  let latestStatusUpdate = null;
 
   function renderTracker() {
     const todayStr = ymd(new Date());
@@ -1680,7 +1738,25 @@
       progressPct = (idx / tripPlan.length) * 100;
     }
 
-    card.innerHTML = html;
+    // If the most recent posted status update matches a known place on the route,
+    // let it override the date-based progress position — this is what makes a real-world
+    // detour (e.g. "spent the night in Joplin instead") move the bar correctly.
+    let statusOverrideHtml = '';
+    if (latestStatusUpdate) {
+      const checkpoint = matchRouteCheckpoint(latestStatusUpdate.location);
+      if (checkpoint !== null) {
+        progressPct = checkpoint.pct;
+        const reportedTime = new Date(latestStatusUpdate.created_at).toLocaleString('en-US', { weekday: 'short', month: 'short', day: 'numeric', hour: 'numeric', minute: '2-digit' });
+        statusOverrideHtml = `
+          <div class="tracker-override">
+            📍 <strong>Last reported location:</strong> ${escapeHtml(latestStatusUpdate.location)}
+            <span class="tracker-override-time">(${reportedTime})</span>
+          </div>
+        `;
+      }
+    }
+
+    card.innerHTML = html + statusOverrideHtml;
     fill.style.width = Math.min(100, Math.max(0, progressPct)) + '%';
 
     const jumpBtn = document.getElementById('trackerJumpBtn');
@@ -1754,12 +1830,15 @@
     if (log === null) {
       logEl.innerHTML = '<div class="status-entry-empty">Couldn\'t load updates right now. Check connection and try again.</div>';
       lastEl.textContent = '';
+      // leave latestStatusUpdate as-is on a fetch error — don't blow away a known-good override
       return;
     }
 
     if (log.length === 0) {
       logEl.innerHTML = '<div class="status-entry-empty">No updates posted yet.</div>';
       lastEl.textContent = '';
+      latestStatusUpdate = null;
+      renderTracker();
       return;
     }
 
@@ -1780,6 +1859,11 @@
     const mostRecent = log[0];
     const recentTime = new Date(mostRecent.created_at).toLocaleString('en-US', { month: 'short', day: 'numeric', hour: 'numeric', minute: '2-digit' });
     lastEl.innerHTML = `Last update: <strong>${escapeHtml(mostRecent.location)}</strong> (${recentTime})`;
+
+    // Feed the most recent update into the tracker so the progress bar reflects
+    // reality if it matches a known place on the route (e.g. an unplanned overnight stop).
+    latestStatusUpdate = mostRecent;
+    renderTracker();
   }
 
   const statusToggleBtn = document.getElementById('statusToggleBtn');
