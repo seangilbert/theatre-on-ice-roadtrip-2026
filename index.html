@@ -1,0 +1,1955 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Theatre On Ice National Competition 2026 - Road Trip</title>
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Special+Elite&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --asphalt: #1c1c1e;
+    --stripe: #f5c842;
+    --dust: #d4c5a9;
+    --rust: #b84c20;
+    --sky: #4a7fa5;
+    --sage: #7a9e7e;
+    --paper: #f0ead8;
+    --ink: #2a2318;
+    --muted: #8a7f6e;
+    --warn: #c47a1e;
+    --d1: #e0623a;
+    --d2: #4a9ae0;
+    --d3: #7ac05a;
+    --d4: #e0b428;
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+
+  body {
+    background-color: var(--asphalt);
+    color: var(--dust);
+    font-family: 'Inter', sans-serif;
+    font-size: 15px;
+    line-height: 1.6;
+  }
+
+  .hero {
+    position: relative;
+    background: var(--asphalt);
+    padding: 60px 24px 48px;
+    text-align: center;
+    overflow: hidden;
+    border-bottom: 4px solid var(--stripe);
+  }
+
+  .road-line {
+    position: absolute;
+    bottom: 0; left: 0; right: 0;
+    height: 4px;
+    background: repeating-linear-gradient(90deg, var(--stripe) 0, var(--stripe) 40px, transparent 40px, transparent 80px);
+    animation: roadScroll 1.2s linear infinite;
+  }
+  @keyframes roadScroll {
+    from { background-position: 0 0; }
+    to   { background-position: 80px 0; }
+  }
+
+  .hero-eyebrow {
+    font-family: 'Special Elite', cursive;
+    font-size: 13px;
+    letter-spacing: 0.2em;
+    color: var(--sky);
+    text-transform: uppercase;
+    margin-bottom: 16px;
+  }
+
+  .hero h1 {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: clamp(48px, 10vw, 96px);
+    line-height: 0.92;
+    color: var(--paper);
+    letter-spacing: 0.02em;
+    margin-bottom: 8px;
+  }
+  .hero h1 span { color: var(--stripe); }
+
+  .hero-sub {
+    font-family: 'Special Elite', cursive;
+    font-size: 16px;
+    color: var(--muted);
+    margin-top: 18px;
+    margin-bottom: 36px;
+  }
+
+  .trailer-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    background: #2a2210;
+    border: 1px solid var(--warn);
+    border-radius: 4px;
+    padding: 7px 16px;
+    font-family: 'Special Elite', cursive;
+    font-size: 12px;
+    letter-spacing: 0.1em;
+    color: var(--warn);
+    text-transform: uppercase;
+    margin-bottom: 20px;
+  }
+
+  .odometer-wrap {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    background: var(--ink);
+    border: 2px solid var(--muted);
+    border-radius: 4px;
+    padding: 10px 20px;
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 28px;
+    letter-spacing: 0.12em;
+    color: var(--stripe);
+    box-shadow: inset 0 2px 8px rgba(0,0,0,0.6), 0 0 20px rgba(245,200,66,0.08);
+  }
+  .odometer-label {
+    font-family: 'Special Elite', cursive;
+    font-size: 11px;
+    color: var(--muted);
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    display: block;
+    margin-top: 2px;
+  }
+
+  .stats-row {
+    display: flex;
+    justify-content: center;
+    gap: 32px;
+    margin-top: 28px;
+    flex-wrap: wrap;
+  }
+  .stat { text-align: center; }
+  .stat-num {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 32px;
+    color: var(--rust);
+    display: block;
+  }
+  .stat-label {
+    font-family: 'Special Elite', cursive;
+    font-size: 11px;
+    color: var(--muted);
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+  }
+
+  /* ── LIVE TRIP TRACKER ── */
+  .tracker {
+    background: linear-gradient(180deg, #201f1a 0%, var(--asphalt) 100%);
+    padding: 22px 20px 26px;
+    border-bottom: 2px solid #3a3833;
+  }
+  .tracker-inner {
+    max-width: 680px;
+    margin: 0 auto;
+  }
+  .tracker-label {
+    font-family: 'Special Elite', cursive;
+    font-size: 11px;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--stripe);
+    text-align: center;
+    margin-bottom: 12px;
+  }
+  .tracker-card {
+    background: #252420;
+    border: 1.5px solid #3a3833;
+    border-radius: 10px;
+    padding: 16px 20px;
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    flex-wrap: wrap;
+  }
+  .tracker-card.tracker-not-started,
+  .tracker-card.tracker-finished {
+    justify-content: center;
+    text-align: center;
+  }
+  .tracker-day-badge {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 30px;
+    color: var(--stripe);
+    background: var(--ink);
+    border: 2px solid var(--stripe);
+    border-radius: 50%;
+    width: 56px;
+    height: 56px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+    line-height: 1;
+  }
+  .tracker-info { flex: 1; min-width: 180px; }
+  .tracker-route {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 22px;
+    color: var(--paper);
+    letter-spacing: 0.03em;
+    line-height: 1.1;
+  }
+  .tracker-route .arrow { color: var(--rust); margin: 0 4px; }
+  .tracker-meta {
+    font-family: 'Special Elite', cursive;
+    font-size: 11.5px;
+    color: var(--sky);
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+    margin-top: 4px;
+  }
+  .tracker-date {
+    font-family: 'Special Elite', cursive;
+    font-size: 11px;
+    color: var(--muted);
+    letter-spacing: 0.05em;
+    margin-top: 2px;
+  }
+  .tracker-cta {
+    flex-shrink: 0;
+    font-family: 'Special Elite', cursive;
+    font-size: 12px;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    color: var(--asphalt);
+    background: var(--stripe);
+    border-radius: 20px;
+    padding: 8px 16px;
+    cursor: pointer;
+    border: none;
+    transition: opacity 0.2s;
+    white-space: nowrap;
+  }
+  .tracker-cta:hover { opacity: 0.85; }
+
+  .tracker-msg {
+    font-family: 'Special Elite', cursive;
+    font-size: 13px;
+    color: var(--dust);
+    line-height: 1.5;
+  }
+  .tracker-msg strong { color: var(--stripe); }
+
+  .tracker-progress { margin-top: 14px; }
+  .tracker-progress-track {
+    height: 6px;
+    background: #1a1a18;
+    border-radius: 4px;
+    overflow: hidden;
+    border: 1px solid #333;
+  }
+  .tracker-progress-fill {
+    height: 100%;
+    background: linear-gradient(90deg, var(--rust), var(--stripe));
+    width: 0%;
+    transition: width 0.6s ease;
+    border-radius: 4px;
+  }
+  .tracker-progress-labels {
+    display: flex;
+    justify-content: space-between;
+    font-family: 'Special Elite', cursive;
+    font-size: 10px;
+    color: var(--muted);
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    margin-top: 4px;
+  }
+
+  @media (max-width: 560px) {
+    .tracker-card { padding: 14px; gap: 12px; }
+    .tracker-route { font-size: 18px; }
+    .tracker-day-badge { width: 46px; height: 46px; font-size: 22px; }
+  }
+
+  /* ── MANUAL STATUS UPDATE ── */
+  .status-toggle-row {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 12px;
+    margin-top: 14px;
+    flex-wrap: wrap;
+  }
+  .status-toggle-btn {
+    font-family: 'Special Elite', cursive;
+    font-size: 12px;
+    letter-spacing: 0.06em;
+    color: var(--sky);
+    background: transparent;
+    border: 1.5px dashed var(--sky);
+    border-radius: 20px;
+    padding: 7px 16px;
+    cursor: pointer;
+    transition: all 0.2s;
+  }
+  .status-toggle-btn:hover { background: rgba(74,127,165,0.12); color: var(--paper); }
+  .status-toggle-btn.active { background: var(--sky); color: #06151f; border-style: solid; }
+
+  .status-last {
+    font-family: 'Special Elite', cursive;
+    font-size: 11px;
+    color: var(--muted);
+    letter-spacing: 0.04em;
+  }
+  .status-last strong { color: var(--sage); }
+
+  .status-panel {
+    display: none;
+    margin-top: 14px;
+    background: #1f1e1a;
+    border: 1px solid #3a3833;
+    border-radius: 8px;
+    padding: 16px;
+  }
+  .status-panel.open { display: block; }
+
+  .status-field { margin-bottom: 12px; }
+  .status-field label {
+    display: block;
+    font-family: 'Special Elite', cursive;
+    font-size: 11px;
+    color: var(--stripe);
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+    margin-bottom: 6px;
+  }
+  .status-field input,
+  .status-field textarea {
+    width: 100%;
+    background: #15140f;
+    border: 1px solid #3a3833;
+    border-radius: 6px;
+    padding: 9px 12px;
+    color: var(--paper);
+    font-family: 'Inter', sans-serif;
+    font-size: 13.5px;
+    resize: vertical;
+  }
+  .status-field textarea { min-height: 56px; }
+  .status-field input:focus,
+  .status-field textarea:focus {
+    outline: none;
+    border-color: var(--stripe);
+  }
+  .status-field input::placeholder,
+  .status-field textarea::placeholder { color: #5a5648; }
+
+  .status-actions {
+    display: flex;
+    gap: 10px;
+    margin-bottom: 4px;
+  }
+  .status-save-btn {
+    font-family: 'Special Elite', cursive;
+    font-size: 12px;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    color: var(--asphalt);
+    background: var(--stripe);
+    border: none;
+    border-radius: 20px;
+    padding: 8px 18px;
+    cursor: pointer;
+    transition: opacity 0.2s;
+  }
+  .status-save-btn:hover { opacity: 0.85; }
+  .status-clear-btn {
+    font-family: 'Special Elite', cursive;
+    font-size: 11px;
+    letter-spacing: 0.05em;
+    color: var(--muted);
+    background: transparent;
+    border: 1px solid #3a3833;
+    border-radius: 20px;
+    padding: 8px 14px;
+    cursor: pointer;
+    transition: all 0.2s;
+  }
+  .status-clear-btn:hover { color: var(--rust); border-color: var(--rust); }
+
+  .status-log {
+    margin-top: 14px;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    max-height: 240px;
+    overflow-y: auto;
+  }
+  .status-entry {
+    background: #252420;
+    border-left: 3px solid var(--sky);
+    border-radius: 0 6px 6px 0;
+    padding: 10px 14px;
+  }
+  .status-entry-time {
+    font-family: 'Special Elite', cursive;
+    font-size: 10px;
+    color: var(--muted);
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+    margin-bottom: 3px;
+  }
+  .status-entry-loc {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 15px;
+    color: var(--paper);
+    letter-spacing: 0.02em;
+  }
+  .status-entry-note {
+    font-size: 12.5px;
+    color: var(--dust);
+    margin-top: 3px;
+    line-height: 1.4;
+  }
+  .status-entry-empty {
+    font-family: 'Special Elite', cursive;
+    font-size: 12px;
+    color: var(--muted);
+    text-align: center;
+    padding: 8px 0;
+  }
+
+  @media (max-width: 560px) {
+    .status-actions { flex-wrap: wrap; }
+  }
+
+  /* ── STICKY DAY FILTER ── */
+  .day-filter-bar {
+    position: sticky;
+    top: 0;
+    z-index: 50;
+    background: rgba(28,28,30,0.97);
+    backdrop-filter: blur(6px);
+    border-bottom: 2px solid var(--stripe);
+    padding: 12px 20px;
+    display: flex;
+    justify-content: center;
+    gap: 8px;
+    flex-wrap: wrap;
+  }
+  .day-filter-btn {
+    font-family: 'Special Elite', cursive;
+    font-size: 12px;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--dust);
+    background: #252420;
+    border: 1.5px solid #3a3833;
+    border-radius: 20px;
+    padding: 7px 16px;
+    cursor: pointer;
+    transition: all 0.2s;
+  }
+  .day-filter-btn:hover { border-color: var(--stripe); color: var(--paper); }
+  .day-filter-btn.active {
+    background: var(--stripe);
+    color: var(--asphalt);
+    border-color: var(--stripe);
+    font-weight: 600;
+  }
+  .day-filter-btn[data-day="1"].active { background: var(--d1); border-color: var(--d1); color: #1a0f08; }
+  .day-filter-btn[data-day="2"].active { background: var(--d2); border-color: var(--d2); color: #06151f; }
+  .day-filter-btn[data-day="3"].active { background: var(--d3); border-color: var(--d3); color: #0c1c07; }
+  .day-filter-btn[data-day="4"].active { background: var(--d4); border-color: var(--d4); color: #1f1505; }
+
+  .route-container {
+    max-width: 780px;
+    margin: 0 auto;
+    padding: 0 20px 40px;
+  }
+
+  .scroll-hint {
+    text-align: center;
+    font-family: 'Special Elite', cursive;
+    font-size: 11px;
+    color: var(--muted);
+    letter-spacing: 0.06em;
+    padding: 18px 0 0;
+  }
+
+  .day-card {
+    position: relative;
+    margin-top: 56px;
+    transition: opacity 0.3s, transform 0.3s;
+  }
+  .day-card.hidden-day {
+    display: none;
+  }
+
+  .day-card:not(:last-child)::after {
+    content: '';
+    position: absolute;
+    left: 28px;
+    top: 68px;
+    bottom: -56px;
+    width: 2px;
+    background: repeating-linear-gradient(to bottom, var(--muted) 0, var(--muted) 6px, transparent 6px, transparent 12px);
+  }
+
+  .day-header {
+    display: flex;
+    align-items: flex-start;
+    gap: 20px;
+    margin-bottom: 24px;
+  }
+
+  .day-badge {
+    width: 58px;
+    height: 58px;
+    border-radius: 50%;
+    border: 3px solid var(--stripe);
+    background: var(--ink);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+    z-index: 1;
+  }
+  .day-badge-num {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 24px;
+    color: var(--stripe);
+    line-height: 1;
+  }
+  .day-badge-word {
+    font-family: 'Special Elite', cursive;
+    font-size: 8px;
+    color: var(--muted);
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+  }
+
+  .day-title-block { padding-top: 4px; }
+  .day-route {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 28px;
+    color: var(--paper);
+    line-height: 1;
+    letter-spacing: 0.03em;
+  }
+  .day-route .arrow { color: var(--rust); margin: 0 4px; }
+  .day-meta {
+    font-family: 'Special Elite', cursive;
+    font-size: 12px;
+    color: var(--sky);
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    margin-top: 4px;
+  }
+  .day-theme {
+    font-style: italic;
+    color: var(--muted);
+    font-family: 'Special Elite', cursive;
+    font-size: 13px;
+    margin-top: 2px;
+  }
+
+  .stops-list {
+    margin-left: 78px;
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+  }
+
+  /* ── COLLAPSIBLE STOP CARDS ── */
+  .stop {
+    background: #252420;
+    border-left: 3px solid var(--rust);
+    border-radius: 0 6px 6px 0;
+    padding: 14px 18px;
+    transition: border-color 0.2s, background 0.2s, box-shadow 0.3s;
+    cursor: pointer;
+    scroll-margin-top: 90px;
+  }
+  .stop:hover { border-color: var(--stripe); background: #2c2a24; }
+  .stop.pin-active {
+    box-shadow: 0 0 0 2px var(--stripe), 0 4px 18px rgba(245,200,66,0.25);
+    background: #2c2a24;
+  }
+
+  .stop-head {
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    gap: 10px;
+  }
+  .stop-toggle {
+    flex-shrink: 0;
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 16px;
+    color: var(--muted);
+    transition: transform 0.25s;
+    margin-top: 1px;
+    user-select: none;
+  }
+  .stop.expanded .stop-toggle { transform: rotate(45deg); color: var(--stripe); }
+
+  .stop-name {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 18px;
+    color: var(--paper);
+    letter-spacing: 0.04em;
+  }
+  .stop-location {
+    font-family: 'Special Elite', cursive;
+    font-size: 11px;
+    color: var(--sky);
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    margin-bottom: 6px;
+  }
+  .stop-body {
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.3s ease;
+  }
+  .stop.expanded .stop-body { max-height: 500px; }
+  .stop-desc {
+    font-size: 13.5px;
+    color: var(--dust);
+    line-height: 1.55;
+    padding-top: 8px;
+  }
+
+  .stop.anchor {
+    border-left-color: var(--sage);
+    background: #222820;
+  }
+  .stop.anchor .stop-name { color: var(--sage); }
+  .stop.anchor:hover { border-color: var(--stripe); }
+
+  .trailer-note {
+    display: flex;
+    align-items: flex-start;
+    gap: 7px;
+    margin-top: 8px;
+    background: #2a2210;
+    border-radius: 4px;
+    padding: 7px 10px;
+    font-size: 12px;
+    color: var(--warn);
+    font-family: 'Special Elite', cursive;
+    letter-spacing: 0.04em;
+  }
+  .trailer-note-icon { flex-shrink: 0; font-size: 13px; margin-top: 1px; }
+
+  .anchor-label {
+    display: inline-block;
+    font-family: 'Special Elite', cursive;
+    font-size: 10px;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--asphalt);
+    background: var(--sage);
+    border-radius: 2px;
+    padding: 2px 6px;
+    margin-bottom: 4px;
+  }
+
+  /* ── MAP ── */
+  .map-section {
+    max-width: 900px;
+    margin: 0 auto 20px;
+    padding: 40px 20px 20px;
+    border-top: 1px solid #333;
+  }
+  .map-wrap {
+    background: #111;
+    border: 1px solid #2a2a2a;
+    border-radius: 8px;
+    overflow: hidden;
+    box-shadow: 0 4px 24px rgba(0,0,0,0.5);
+  }
+  .map-hint {
+    text-align: center;
+    font-family: 'Special Elite', cursive;
+    font-size: 11px;
+    color: var(--muted);
+    letter-spacing: 0.06em;
+    margin-top: 10px;
+  }
+
+  /* ── GOOGLE MAPS EMBED BLOCK ── */
+  .gmap-block {
+    margin-top: 48px;
+    padding-top: 36px;
+    border-top: 1px dashed #333;
+  }
+  .gmap-heading {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 24px;
+    color: var(--paper);
+    letter-spacing: 0.04em;
+    text-align: center;
+    margin-bottom: 6px;
+  }
+  .gmap-heading span { color: var(--stripe); }
+
+  .gmap-tabs {
+    display: flex;
+    justify-content: center;
+    gap: 8px;
+    flex-wrap: wrap;
+    margin-bottom: 16px;
+  }
+  .gmap-tab {
+    font-family: 'Special Elite', cursive;
+    font-size: 12px;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    color: var(--dust);
+    background: #252420;
+    border: 1.5px solid #3a3833;
+    border-radius: 20px;
+    padding: 7px 16px;
+    cursor: pointer;
+    transition: all 0.2s;
+  }
+  .gmap-tab:hover { border-color: var(--stripe); color: var(--paper); }
+  .gmap-tab.active {
+    background: var(--stripe);
+    color: var(--asphalt);
+    border-color: var(--stripe);
+    font-weight: 600;
+  }
+  .gmap-tab[data-gday="1"].active { background: var(--d1); border-color: var(--d1); color: #1a0f08; }
+  .gmap-tab[data-gday="2"].active { background: var(--d2); border-color: var(--d2); color: #06151f; }
+  .gmap-tab[data-gday="3"].active { background: var(--d3); border-color: var(--d3); color: #0c1c07; }
+  .gmap-tab[data-gday="4"].active { background: var(--d4); border-color: var(--d4); color: #1f1505; }
+
+  .gmap-frame-wrap {
+    border: 1px solid #2a2a2a;
+    border-radius: 8px;
+    overflow: hidden;
+    box-shadow: 0 4px 24px rgba(0,0,0,0.5);
+    background: #111;
+  }
+  .gmap-iframe {
+    width: 100%;
+    height: 480px;
+    border: 0;
+    display: block;
+    filter: saturate(0.9);
+  }
+
+  .gmap-open-link {
+    text-align: center;
+    margin-top: 14px;
+  }
+  .gmap-open-link a {
+    font-family: 'Special Elite', cursive;
+    font-size: 13px;
+    letter-spacing: 0.04em;
+    color: var(--stripe);
+    text-decoration: none;
+    border-bottom: 1px dashed var(--stripe);
+    padding-bottom: 2px;
+    transition: opacity 0.2s;
+  }
+  .gmap-open-link a:hover { opacity: 0.75; }
+
+  @media (max-width: 560px) {
+    .gmap-iframe { height: 360px; }
+    .gmap-tab { font-size: 10.5px; padding: 6px 12px; }
+  }
+
+  .map-pin-group { cursor: pointer; }
+  .map-pin-group circle { transition: r 0.15s, filter 0.15s; }
+  .map-pin-group:hover circle { filter: brightness(1.3); }
+  .map-pin-group.pin-pulse circle.pin-dot {
+    animation: pinPulse 1.1s ease-out 2;
+  }
+  @keyframes pinPulse {
+    0%   { r: var(--base-r); }
+    40%  { r: calc(var(--base-r) * 1.9); filter: brightness(1.5); }
+    100% { r: var(--base-r); }
+  }
+
+  /* PRACTICAL NOTES */
+  .notes-section {
+    max-width: 780px;
+    margin: 0 auto 60px;
+    padding: 0 20px;
+    border-top: 1px solid #333;
+    padding-top: 40px;
+  }
+  .notes-heading {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 28px;
+    color: var(--paper);
+    letter-spacing: 0.05em;
+    margin-bottom: 20px;
+  }
+  .notes-heading span { color: var(--stripe); }
+  .notes-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+    gap: 14px;
+  }
+  .note-card {
+    background: #252420;
+    border-radius: 6px;
+    padding: 16px;
+  }
+  .note-card.warn-card { background: #2a2210; border: 1px solid #3d2f0a; }
+  .note-icon { font-size: 22px; margin-bottom: 8px; display: block; }
+  .note-title {
+    font-family: 'Special Elite', cursive;
+    font-size: 12px;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--stripe);
+    margin-bottom: 6px;
+  }
+  .note-card.warn-card .note-title { color: var(--warn); }
+  .note-body { font-size: 13px; color: var(--dust); line-height: 1.5; }
+
+  footer {
+    text-align: center;
+    padding: 24px;
+    font-family: 'Special Elite', cursive;
+    font-size: 12px;
+    color: var(--muted);
+    letter-spacing: 0.08em;
+    border-top: 4px solid var(--stripe);
+    background: var(--ink);
+  }
+
+  @media (max-width: 560px) {
+    .stops-list { margin-left: 0; margin-top: 16px; }
+    .day-card::after { display: none; }
+    .stats-row { gap: 20px; }
+    .day-filter-bar { gap: 6px; padding: 10px 12px; }
+    .day-filter-btn { font-size: 10.5px; padding: 6px 11px; }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .road-line { animation: none; }
+    .map-pin-group.pin-pulse circle.pin-dot { animation: none; }
+    .stop-body, .stop-toggle { transition: none; }
+  }
+</style>
+</head>
+<body>
+
+<header class="hero">
+  <p class="hero-eyebrow">Theatre On Ice National Competition 2026</p>
+  <h1>Irvine<span> → </span>Norwood</h1>
+  <p class="hero-sub">The Road Trip · California to Massachusetts · 3 Nights on the Road</p>
+
+  <div class="trailer-badge">🚛 Trailer Edition &mdash; 26ft Tow · Show Props & Equipment · Hotel Nights</div>
+
+  <div class="odometer-wrap">
+    <div>
+      <span id="odo">0</span>
+      <span class="odometer-label">Miles</span>
+    </div>
+  </div>
+
+  <div class="stats-row">
+    <div class="stat"><span class="stat-num">3</span><span class="stat-label">Nights</span></div>
+    <div class="stat"><span class="stat-num">11</span><span class="stat-label">States</span></div>
+    <div class="stat"><span class="stat-num">17</span><span class="stat-label">Stops</span></div>
+    <div class="stat"><span class="stat-num">796</span><span class="stat-label">Avg mi/day</span></div>
+  </div>
+
+  <div class="road-line"></div>
+</header>
+
+<!-- LIVE TRIP TRACKER -->
+<section class="tracker">
+  <div class="tracker-inner">
+    <div class="tracker-label" id="trackerLabel">Trip Tracker</div>
+    <div class="tracker-card" id="trackerCard">
+      <!-- populated by JS -->
+    </div>
+    <div class="tracker-progress">
+      <div class="tracker-progress-track">
+        <div class="tracker-progress-fill" id="trackerFill"></div>
+      </div>
+      <div class="tracker-progress-labels">
+        <span>Irvine</span>
+        <span>Norwood</span>
+      </div>
+    </div>
+
+    <!-- MANUAL STATUS UPDATE -->
+    <div class="status-toggle-row">
+      <button class="status-toggle-btn" id="statusToggleBtn">📍 Post a Status Update</button>
+      <span class="status-last" id="statusLast"></span>
+    </div>
+    <div class="status-panel" id="statusPanel">
+      <div class="status-field">
+        <label for="statusLocation">Where are you right now?</label>
+        <input type="text" id="statusLocation" placeholder="e.g. Just past Amarillo, fuel stop">
+      </div>
+      <div class="status-field">
+        <label for="statusNote">Note (delays, route change, anything)</label>
+        <textarea id="statusNote" placeholder="e.g. Running 2 hrs behind, skipping Cadillac Ranch, pushing straight to Tulsa"></textarea>
+      </div>
+      <div class="status-actions">
+        <button class="status-save-btn" id="statusSaveBtn">Post Update</button>
+        <button class="status-clear-btn" id="statusClearBtn">Clear Log</button>
+      </div>
+      <div class="status-log" id="statusLog"></div>
+    </div>
+  </div>
+</section>
+
+<!-- DAY FILTER -->
+<div class="day-filter-bar">
+  <button class="day-filter-btn active" data-day="all">All Days</button>
+  <button class="day-filter-btn" data-day="1">Day 1 · Roswell</button>
+  <button class="day-filter-btn" data-day="2">Day 2 · Tulsa</button>
+  <button class="day-filter-btn" data-day="3">Day 3 · Columbus</button>
+  <button class="day-filter-btn" data-day="4">Day 4 · Norwood</button>
+</div>
+
+<p class="scroll-hint">Click any stop to expand details · click a map pin to jump to it</p>
+
+<main class="route-container">
+
+  <!-- DAY 1 -->
+  <div class="day-card" data-day="1">
+    <div class="day-header">
+      <div class="day-badge">
+        <span class="day-badge-num">1</span>
+        <span class="day-badge-word">Day</span>
+      </div>
+      <div class="day-title-block">
+        <div class="day-route">Irvine <span class="arrow">→</span> Roswell</div>
+        <div class="day-meta">~760 miles · I-10 E → US-285 N · ~11 hrs towing</div>
+        <div class="day-theme">Desert to the Alien Capital</div>
+      </div>
+    </div>
+    <div class="stops-list">
+      <div class="stop" id="stop-yuma" data-pin="yuma">
+        <div class="stop-head">
+          <div>
+            <div class="stop-location">Yuma, AZ · Allow 45 min</div>
+            <div class="stop-name">Yuma Territorial Prison State Historic Park</div>
+          </div>
+          <span class="stop-toggle">+</span>
+        </div>
+        <div class="stop-body">
+          <div class="stop-desc">The real Old West prison that inspired "3:10 to Yuma" — original cellblocks, a guard tower, and the notorious "dark cell" used for solitary confinement, built in 1876 with two-foot-thick adobe walls. Right off I-8, about 2.5 hours into the drive from Irvine, well before Tucson. Small museum, easy walk-through, and a good first leg-stretcher of the trip.</div>
+          <div class="trailer-note"><span class="trailer-note-icon">🚛</span> State park lot is spacious and flat, easy access just off the interstate exit.</div>
+        </div>
+      </div>
+      <div class="stop" id="stop-tucson" data-pin="tucson">
+        <div class="stop-head">
+          <div>
+            <div class="stop-location">Tucson, AZ · Lunch Stop</div>
+            <div class="stop-name">Tucson — Sonoran Hot Dog</div>
+          </div>
+          <span class="stop-toggle">+</span>
+        </div>
+        <div class="stop-body">
+          <div class="stop-desc">Tucson is America's only UNESCO City of Gastronomy and the Sonoran hot dog — bacon-wrapped, bean-topped, served in a bolillo bun — is its greatest contribution to roadside eating. Hit El Güero Canelo or BK Tacos on the east side of town, then get back on I-10. Don't leave without one.</div>
+          <div class="trailer-note"><span class="trailer-note-icon">🚛</span> Street parking is workable at drive-in spots; or grab a fast-food lot nearby and walk half a block.</div>
+        </div>
+      </div>
+      <div class="stop" id="stop-ufomuseum" data-pin="ufomuseum">
+        <div class="stop-head">
+          <div>
+            <div class="stop-location">Roswell, NM · Allow 1.5 hrs</div>
+            <div class="stop-name">International UFO Museum & Research Center</div>
+          </div>
+          <span class="stop-toggle">+</span>
+        </div>
+        <div class="stop-body">
+          <div class="stop-desc">Alien autopsy dioramas, declassified government documents, witness testimonies, and a gift shop that commits fully to the bit. Roswell has been leaning into the 1947 mythology for 75 years and the result is genuinely fun. Arrive with enough daylight to walk Main Street — the whole town is in on the joke.</div>
+          <div class="trailer-note"><span class="trailer-note-icon">🚛</span> Park on N. Main St. municipal lot — long pull-through spaces. One person can wait with the rig while the other goes in, then swap.</div>
+        </div>
+      </div>
+      <div class="stop" id="stop-ufomcd" data-pin="ufomcd">
+        <div class="stop-head">
+          <div>
+            <div class="stop-location">Roswell, NM · Across the Street</div>
+            <div class="stop-name">The UFO McDonald's</div>
+          </div>
+          <span class="stop-toggle">+</span>
+        </div>
+        <div class="stop-body">
+          <div class="stop-desc">Directly across from the UFO Museum sits the only space-and-UFO-themed McDonald's in the world — the building itself is shaped like a flying saucer. It's free, it's five minutes, and it's exactly the kind of detail that makes Roswell worth the stop. Grab a coffee and take the photo.</div>
+          <div class="trailer-note"><span class="trailer-note-icon">🚛</span> Same municipal lot covers both stops — no need to move the rig.</div>
+        </div>
+      </div>
+      <div class="stop anchor" id="stop-roswellhotel" data-pin="roswellhotel">
+        <div class="stop-head">
+          <div>
+            <span class="anchor-label">Night Stop</span>
+            <div class="stop-location">Roswell, NM</div>
+            <div class="stop-name">Hotel on Main St. or N. Pine Lodge Rd.</div>
+          </div>
+          <span class="stop-toggle">+</span>
+        </div>
+        <div class="stop-body">
+          <div class="stop-desc">The Fairfield Inn or Holiday Inn Express on the north end of Roswell both have large open lots — straightforward trailer parking. Check in, drop the rig, and walk to dinner on Main Street. Roswell commits to the alien theme hard; lean into it.</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- DAY 2 -->
+  <div class="day-card" data-day="2">
+    <div class="day-header">
+      <div class="day-badge">
+        <span class="day-badge-num">2</span>
+        <span class="day-badge-word">Day</span>
+      </div>
+      <div class="day-title-block">
+        <div class="day-route">Roswell <span class="arrow">→</span> Tulsa</div>
+        <div class="day-meta">~740 miles · US-70 E → I-40 E → I-44 E · ~11.5 hrs towing</div>
+        <div class="day-theme">Route 66 Country</div>
+      </div>
+    </div>
+    <div class="stops-list">
+      <div class="stop" id="stop-glenrio" data-pin="glenrio">
+        <div class="stop-head">
+          <div>
+            <div class="stop-location">Glenrio, TX/NM Border · Allow 30 min</div>
+            <div class="stop-name">Glenrio Ghost Town</div>
+          </div>
+          <span class="stop-toggle">+</span>
+        </div>
+        <div class="stop-body">
+          <div class="stop-desc">A real ghost town straddling the Texas-New Mexico border, right off I-40 at Exit 0. Glenrio thrived on Route 66 traffic until I-40 bypassed it in the 1970s — today the State Line Motel & Cafe sign still reads "First in Texas" on one side and "Last in Texas" on the other, depending which way you're heading. An abandoned Texaco station and the Little Juarez Diner are still standing too. No admission, no gift shop, just empty buildings and wind. Watch your footing — structures are fragile.</div>
+          <div class="trailer-note"><span class="trailer-note-icon">🚛</span> Open gravel area right off the exit, plenty of room for a trailer. No tight access.</div>
+        </div>
+      </div>
+      <div class="stop" id="stop-cadillac" data-pin="cadillac">
+        <div class="stop-head">
+          <div>
+            <div class="stop-location">Amarillo, TX · Mid-Morning</div>
+            <div class="stop-name">Cadillac Ranch</div>
+          </div>
+          <span class="stop-toggle">+</span>
+        </div>
+        <div class="stop-body">
+          <div class="stop-desc">Ten Cadillacs buried nose-first in a panhandle field since 1974. The paint job changes daily because everyone adds their own layer — participation is the entire point. Flat gravel frontage road, easy trailer parking. Pack two cans of Rustoleum before you leave Irvine. This stop is non-negotiable.</div>
+          <div class="trailer-note"><span class="trailer-note-icon">🚛</span> Park on the flat frontage road shoulder alongside other visitors. No tight turns, easy out.</div>
+        </div>
+      </div>
+      <div class="stop" id="stop-ozymandias" data-pin="ozymandias">
+        <div class="stop-head">
+          <div>
+            <div class="stop-location">Amarillo, TX · 10 Minutes South on I-27</div>
+            <div class="stop-name">Ozymandias on the Plains</div>
+          </div>
+          <span class="stop-toggle">+</span>
+        </div>
+        <div class="stop-body">
+          <div class="stop-desc">Two giant legs in athletic socks stand alone in a pasture off I-27 — a deadpan homage to Shelley's poem about the ruined statue of Ramesses II. No museum, no gift shop, just enormous stone legs behind a fence with cattle wandering nearby. It's the kind of deeply weird, unphotographed-by-tour-buses stop that makes this whole trip worth doing.</div>
+          <div class="trailer-note"><span class="trailer-note-icon">🚛</span> Roadside pull-off, no parking lot — quick stop from the shoulder, then back on the highway.</div>
+        </div>
+      </div>
+      <div class="stop" id="stop-bigtexan" data-pin="bigtexan">
+        <div class="stop-head">
+          <div>
+            <div class="stop-location">Amarillo, TX · Lunch</div>
+            <div class="stop-name">The Big Texan Steak Ranch</div>
+          </div>
+          <span class="stop-toggle">+</span>
+        </div>
+        <div class="stop-body">
+          <div class="stop-desc">The 72-ounce free steak challenge, a neon sign visible from orbit, and the spectacle of someone attempting it on a raised stage in front of strangers. You will not finish the steak. You will enjoy watching someone else try. The Big Texan has its own large lot — the most trailer-friendly lunch stop on the trip.</div>
+          <div class="trailer-note"><span class="trailer-note-icon">🚛</span> Large dedicated lot with room for long rigs. Easy pull-in off I-40 frontage road.</div>
+        </div>
+      </div>
+      <div class="stop" id="stop-okcdrivethru" data-pin="okcdrivethru">
+        <div class="stop-head">
+          <div>
+            <div class="stop-location">Oklahoma City, OK · Late Afternoon Pass-Through</div>
+            <div class="stop-name">OKC — Quick Fuel & Stretch</div>
+          </div>
+          <span class="stop-toggle">+</span>
+        </div>
+        <div class="stop-body">
+          <div class="stop-desc">OKC sits about two-thirds of the way through today's drive — a good fuel stop and leg-stretch, but you're pushing on to Tulsa tonight rather than stopping here. If you want Cattlemen's Steakhouse in Stockyards City (open since 1910), this is the moment, but it'll cost you 30-45 minutes you don't really have. Otherwise grab fast food at the interstate exit and keep moving.</div>
+          <div class="trailer-note"><span class="trailer-note-icon">🚛</span> Any truck-stop fuel plaza off I-40/I-44 junction handles a trailer easily.</div>
+        </div>
+      </div>
+      <div class="stop anchor" id="stop-tulsahotel" data-pin="tulsahotel">
+        <div class="stop-head">
+          <div>
+            <span class="anchor-label">Night Stop</span>
+            <div class="stop-location">Tulsa, OK</div>
+            <div class="stop-name">Hotel near I-44 / Route 66 Corridor</div>
+          </div>
+          <span class="stop-toggle">+</span>
+        </div>
+        <div class="stop-body">
+          <div class="stop-desc">Pushing 100 extra miles past OKC to Tulsa tonight is what makes tomorrow's brutal day bearable — it splits the OKC-to-Columbus haul into two reasonable days instead of one 13-hour slog. Tulsa also has real Route 66 character of its own: the 76-foot Golden Driller statue is visible from the interstate, and if you have any energy left, the Blue Whale of Catoosa is a quick detour. Chain hotels along the I-44 corridor have the surface lots you need for the trailer.</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- DAY 3 -->
+  <div class="day-card" data-day="3">
+    <div class="day-header">
+      <div class="day-badge">
+        <span class="day-badge-num">3</span>
+        <span class="day-badge-word">Day</span>
+      </div>
+      <div class="day-title-block">
+        <div class="day-route">Tulsa <span class="arrow">→</span> Chicago <span class="arrow">→</span> Columbus</div>
+        <div class="day-meta">~1,045 miles · I-44 E → I-55 N → I-90 E → I-80 E → I-71 S · ~16-17 hrs towing</div>
+        <div class="day-theme">The Long One — Two Drivers Required</div>
+      </div>
+    </div>
+    <div class="stops-list">
+      <div class="stop" id="stop-springfieldil" data-pin="springfieldil">
+        <div class="stop-head">
+          <div>
+            <div class="stop-location">Springfield, IL · Optional Fuel Stop</div>
+            <div class="stop-name">Springfield — Lincoln's Hometown</div>
+          </div>
+          <span class="stop-toggle">+</span>
+        </div>
+        <div class="stop-body">
+          <div class="stop-desc">Heads up: turning north for Chicago means this route runs I-44 to I-55 through central Illinois instead of I-70 through St. Louis — so the rocking chair in Cuba, MO and the Gateway Arch drive-by are off the path on this version of the trip. Springfield is a reasonable consolation stop if you want to stretch your legs: Lincoln's Tomb and his restored home are both right off the interstate, free to view from outside if you're short on time. On a day this long, even a 15-minute stretch break matters.</div>
+          <div class="trailer-note"><span class="trailer-note-icon">🚛</span> Truck-stop fuel plazas right off I-55 handle a trailer easily — good spot to top off before Chicago.</div>
+        </div>
+      </div>
+      <div class="stop" id="stop-chicagodropoff" data-pin="chicagodropoff">
+        <div class="stop-head">
+          <div>
+            <div class="stop-location">Chicago, IL · Quick Stop — Address TBD</div>
+            <div class="stop-name">Prop Drop-Off</div>
+          </div>
+          <span class="stop-toggle">+</span>
+        </div>
+        <div class="stop-body">
+          <div class="stop-desc">This is a working stop, not a sightseeing one — drop the show props at the venue/warehouse and get back on the road. No Cloud Gate, no lakefront, no deep-dish today; there simply isn't time on a day this long. Update this card with the exact drop-off address once you have it, so the route and map can route around downtown traffic accurately rather than assuming the Loop.</div>
+          <div class="trailer-note"><span class="trailer-note-icon">🚛</span> If it's a quick loading-dock handoff you may be able to stay hitched. If you need to unhitch or park for a while, that adds real time to an already long day — plan for it.</div>
+        </div>
+      </div>
+      <div class="stop anchor" id="stop-columbushotel" data-pin="columbushotel">
+        <div class="stop-head">
+          <div>
+            <span class="anchor-label">Night Stop</span>
+            <div class="stop-location">Columbus, OH</div>
+            <div class="stop-name">Hotel off I-70 East Columbus</div>
+          </div>
+          <span class="stop-toggle">+</span>
+        </div>
+        <div class="stop-body">
+          <div class="stop-desc">You'll arrive late — this is a 16-17 hour day covering Tulsa to Chicago to Columbus in one push. Two drivers trading off is not optional here; nobody should tow this distance solo. Pre-book the hotel and confirm late check-in. Chain hotels east of downtown on I-70 have the open surface lots you need for the trailer. Once you're in, you're in — the rest of the trip is comparatively easy.</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- DAY 4 -->
+  <div class="day-card" data-day="4">
+    <div class="day-header">
+      <div class="day-badge">
+        <span class="day-badge-num">4</span>
+        <span class="day-badge-word">Day</span>
+      </div>
+      <div class="day-title-block">
+        <div class="day-route">Columbus <span class="arrow">→</span> Norwood</div>
+        <div class="day-meta">~640 miles · I-70 E → I-76 E → I-78 E → I-95 N · ~10 hrs towing</div>
+        <div class="day-theme">The Final Push East</div>
+      </div>
+    </div>
+    <div class="stops-list">
+      <div class="stop" id="stop-crystalcave" data-pin="crystalcave">
+        <div class="stop-head">
+          <div>
+            <div class="stop-location">Kutztown, PA · Allow 1 hr</div>
+            <div class="stop-name">Crystal Cave</div>
+          </div>
+          <span class="stop-toggle">+</span>
+        </div>
+        <div class="stop-body">
+          <div class="stop-desc">Heads up: Roadside America (the famous miniature village once located nearby in Shartlesville) permanently closed in 2020 and its entire collection was auctioned off — it's no longer there. Crystal Cave is the real replacement: discovered in 1871, it's Pennsylvania's first show cave and still family-run. A 55-minute guided tour through limestone formations with names like the Ear of Corn and the Crystal Ballroom, plus a gift shop loaded with rocks and minerals. Right off I-78 Exit 35, open daily through late June.</div>
+          <div class="trailer-note"><span class="trailer-note-icon">🚛</span> Large gravel lot, easy access just off the interstate exit. No tight turns.</div>
+        </div>
+      </div>
+      <div class="stop" id="stop-watergap" data-pin="watergap">
+        <div class="stop-head">
+          <div>
+            <div class="stop-location">Columbia, NJ · Mental Reset</div>
+            <div class="stop-name">Delaware Water Gap</div>
+          </div>
+          <span class="stop-toggle">+</span>
+        </div>
+        <div class="stop-body">
+          <div class="stop-desc">The Delaware River cuts through the Appalachians in a way that's genuinely beautiful. Pull into the visitor center lot — sized for tour buses, handles trailers fine. Walk to the water for ten minutes. You've driven across America in four days. Let it catch up with you before the final sprint up I-95.</div>
+          <div class="trailer-note"><span class="trailer-note-icon">🚛</span> Large flat visitor center lot. Fill the tank at the Columbia exit — last relaxed fuel stop before Connecticut.</div>
+        </div>
+      </div>
+      <div class="stop anchor" id="stop-norwood" data-pin="norwood">
+        <div class="stop-head">
+          <div>
+            <span class="anchor-label">Finish Line</span>
+            <div class="stop-location">Norwood, MA</div>
+            <div class="stop-name">Home</div>
+          </div>
+          <span class="stop-toggle">+</span>
+        </div>
+        <div class="stop-body">
+          <div class="stop-desc">Roll the windows down on the Connecticut shoreline — you'll smell the salt air before you see the ocean. Four days, ~3,185 miles, one country — including a Chicago prop drop-off on the longest day of the trip. That deserves a moment.</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</main>
+
+<!-- MAP SECTION -->
+<section class="map-section">
+  <div class="map-container">
+    <h2 class="notes-heading" style="margin-bottom:8px;">The <span>Route</span></h2>
+    <p class="map-hint" style="margin-bottom:14px;">Click a pin to jump to that stop · use the day filter above to isolate a leg</p>
+    <div class="map-wrap">
+      <svg id="routeMap" viewBox="0 0 960 600" xmlns="http://www.w3.org/2000/svg" style="width:100%;height:auto;display:block;">
+        <defs>
+          <style>
+            .st { fill:#1e2a1e; stroke:#3d5c3d; stroke-width:0.8; }
+            .st-on { fill:#243324; stroke:#4a7a4a; stroke-width:1; }
+          </style>
+        </defs>
+
+        <!-- STATES -->
+        <polygon class="st" points="112,55 175,52 178,68 165,75 155,80 130,82 112,80"/>
+        <text x="143" y="70" fill="#4a7a4a" font-size="8" font-family="Special Elite,cursive" text-anchor="middle">WA</text>
+        <polygon class="st" points="112,80 155,80 158,110 155,140 112,142 108,112"/>
+        <text x="133" y="115" fill="#4a7a4a" font-size="8" font-family="Special Elite,cursive" text-anchor="middle">OR</text>
+        <polygon class="st-on" points="108,142 155,140 160,170 158,200 152,230 145,260 138,285 125,300 112,295 105,270 100,240 98,210 100,180 102,155"/>
+        <text x="127" y="225" fill="#7ab07a" font-size="10" font-family="Special Elite,cursive" text-anchor="middle">CA</text>
+        <polygon class="st" points="155,140 195,135 200,160 198,190 192,215 185,240 158,200 160,170"/>
+        <text x="178" y="185" fill="#4a7a4a" font-size="8" font-family="Special Elite,cursive" text-anchor="middle">NV</text>
+        <polygon class="st" points="175,52 230,48 235,70 232,100 225,120 210,128 195,135 178,68"/>
+        <text x="205" y="88" fill="#4a7a4a" font-size="8" font-family="Special Elite,cursive" text-anchor="middle">ID</text>
+        <polygon class="st" points="230,48 320,42 325,48 322,80 318,98 280,100 255,102 235,70"/>
+        <text x="278" y="72" fill="#4a7a4a" font-size="9" font-family="Special Elite,cursive" text-anchor="middle">MT</text>
+        <polygon class="st" points="322,80 400,76 402,95 400,108 322,108 318,98"/>
+        <text x="361" y="96" fill="#4a7a4a" font-size="8" font-family="Special Elite,cursive" text-anchor="middle">ND</text>
+        <polygon class="st" points="322,108 400,108 402,130 400,148 355,150 322,148"/>
+        <text x="361" y="132" fill="#4a7a4a" font-size="8" font-family="Special Elite,cursive" text-anchor="middle">SD</text>
+        <polygon class="st" points="235,102 318,98 322,108 322,148 255,150 232,148 232,120"/>
+        <text x="278" y="127" fill="#4a7a4a" font-size="8" font-family="Special Elite,cursive" text-anchor="middle">WY</text>
+        <polygon class="st" points="195,135 232,130 232,148 232,180 228,205 200,205 192,215 198,190 200,160"/>
+        <text x="213" y="175" fill="#4a7a4a" font-size="8" font-family="Special Elite,cursive" text-anchor="middle">UT</text>
+        <polygon class="st" points="232,148 322,148 325,185 322,210 228,210 228,205 232,180"/>
+        <text x="278" y="182" fill="#4a7a4a" font-size="8" font-family="Special Elite,cursive" text-anchor="middle">CO</text>
+        <polygon class="st-on" points="192,215 228,210 232,240 230,270 225,295 215,305 200,300 185,285 182,258 185,240"/>
+        <text x="210" y="260" fill="#7ab07a" font-size="9" font-family="Special Elite,cursive" text-anchor="middle">AZ</text>
+        <polygon class="st-on" points="228,210 322,210 325,245 322,285 295,288 270,290 250,288 230,270 232,240"/>
+        <text x="278" y="252" fill="#7ab07a" font-size="9" font-family="Special Elite,cursive" text-anchor="middle">NM</text>
+        <polygon class="st" points="400,76 455,74 460,90 458,112 450,125 440,130 422,132 400,130 400,108 402,95"/>
+        <text x="430" y="105" fill="#4a7a4a" font-size="8" font-family="Special Elite,cursive" text-anchor="middle">MN</text>
+        <polygon class="st" points="322,148 400,148 402,165 398,180 322,180 322,165"/>
+        <text x="361" y="167" fill="#4a7a4a" font-size="8" font-family="Special Elite,cursive" text-anchor="middle">NE</text>
+        <polygon class="st" points="322,180 398,180 400,210 322,210"/>
+        <text x="361" y="198" fill="#4a7a4a" font-size="8" font-family="Special Elite,cursive" text-anchor="middle">KS</text>
+        <polygon class="st" points="400,130 440,130 458,132 462,148 460,165 400,165 400,148"/>
+        <text x="430" y="150" fill="#4a7a4a" font-size="8" font-family="Special Elite,cursive" text-anchor="middle">IA</text>
+        <polygon class="st" points="458,100 490,95 498,105 500,118 495,132 480,138 462,138 458,125 460,112"/>
+        <text x="478" y="120" fill="#4a7a4a" font-size="8" font-family="Special Elite,cursive" text-anchor="middle">WI</text>
+        <polygon class="st" points="498,105 530,100 538,112 535,130 525,138 510,140 498,132 495,120"/>
+        <text x="516" y="122" fill="#4a7a4a" font-size="7" font-family="Special Elite,cursive" text-anchor="middle">MI</text>
+        <polygon class="st-on" points="460,138 480,138 492,145 495,160 492,178 488,198 478,205 462,205 460,185 460,165 462,148"/>
+        <text x="476" y="175" fill="#7ab07a" font-size="8" font-family="Special Elite,cursive" text-anchor="middle">IL</text>
+        <polygon class="st-on" points="400,165 460,165 460,185 462,205 460,218 448,228 438,232 420,228 408,220 400,215 400,195"/>
+        <text x="432" y="198" fill="#7ab07a" font-size="9" font-family="Special Elite,cursive" text-anchor="middle">MO</text>
+        <polygon class="st-on" points="322,210 400,210 400,215 408,220 420,228 438,232 448,228 452,240 420,242 322,242 320,228"/>
+        <text x="385" y="230" fill="#7ab07a" font-size="9" font-family="Special Elite,cursive" text-anchor="middle">OK</text>
+        <polygon class="st" points="448,228 460,218 462,235 460,258 448,262 432,260 420,255 420,242 448,240"/>
+        <text x="440" y="248" fill="#4a7a4a" font-size="8" font-family="Special Elite,cursive" text-anchor="middle">AR</text>
+        <polygon class="st-on" points="295,288 322,288 322,285 322,242 420,242 420,255 432,260 435,278 428,300 418,320 410,340 398,355 385,365 368,370 350,370 330,360 315,345 305,325 295,305"/>
+        <text x="368" y="315" fill="#7ab07a" font-size="11" font-family="Special Elite,cursive" text-anchor="middle">TX</text>
+        <polygon class="st" points="432,260 448,262 460,260 465,275 462,292 450,300 435,298 425,288 428,272"/>
+        <text x="443" y="280" fill="#4a7a4a" font-size="7" font-family="Special Elite,cursive" text-anchor="middle">LA</text>
+        <polygon class="st" points="462,235 475,232 480,248 478,268 472,282 462,288 452,282 450,268 448,250 460,250"/>
+        <text x="465" y="260" fill="#4a7a4a" font-size="7" font-family="Special Elite,cursive" text-anchor="middle">MS</text>
+        <polygon class="st" points="462,218 540,215 548,222 545,235 480,238 462,235"/>
+        <text x="505" y="230" fill="#4a7a4a" font-size="8" font-family="Special Elite,cursive" text-anchor="middle">TN</text>
+        <polygon class="st" points="478,238 545,235 548,258 545,278 530,285 515,288 505,282 498,268 498,250 480,248 478,250"/>
+        <text x="518" y="262" fill="#4a7a4a" font-size="8" font-family="Special Elite,cursive" text-anchor="middle">AL</text>
+        <polygon class="st" points="548,235 572,230 580,248 578,272 568,288 550,295 535,290 528,278 530,258 548,255"/>
+        <text x="556" y="264" fill="#4a7a4a" font-size="8" font-family="Special Elite,cursive" text-anchor="middle">GA</text>
+        <polygon class="st" points="548,295 568,292 578,280 590,295 598,315 602,338 595,350 578,352 562,345 548,328 542,312"/>
+        <text x="568" y="325" fill="#4a7a4a" font-size="8" font-family="Special Elite,cursive" text-anchor="middle">FL</text>
+        <polygon class="st" points="572,215 598,210 608,225 602,240 588,248 572,242 568,232"/>
+        <text x="588" y="230" fill="#4a7a4a" font-size="7" font-family="Special Elite,cursive" text-anchor="middle">SC</text>
+        <polygon class="st" points="548,200 590,195 610,200 615,212 598,215 572,218 548,218 545,208"/>
+        <text x="578" y="210" fill="#4a7a4a" font-size="7" font-family="Special Elite,cursive" text-anchor="middle">NC</text>
+        <polygon class="st" points="548,185 595,178 618,185 620,198 610,205 590,200 548,202 545,195"/>
+        <text x="582" y="194" fill="#4a7a4a" font-size="7" font-family="Special Elite,cursive" text-anchor="middle">VA</text>
+        <polygon class="st" points="545,175 578,170 590,178 595,185 575,188 552,188 545,182"/>
+        <text x="568" y="181" fill="#4a7a4a" font-size="6" font-family="Special Elite,cursive" text-anchor="middle">WV</text>
+        <polygon class="st" points="462,205 545,200 548,212 545,218 480,220 462,218"/>
+        <text x="505" y="213" fill="#4a7a4a" font-size="7" font-family="Special Elite,cursive" text-anchor="middle">KY</text>
+        <polygon class="st-on" points="492,165 520,162 525,178 522,198 518,210 495,212 492,198 492,180"/>
+        <text x="508" y="190" fill="#7ab07a" font-size="8" font-family="Special Elite,cursive" text-anchor="middle">IN</text>
+        <polygon class="st-on" points="520,155 552,150 558,165 558,185 555,200 545,202 522,200 520,182 522,165"/>
+        <text x="538" y="178" fill="#7ab07a" font-size="8" font-family="Special Elite,cursive" text-anchor="middle">OH</text>
+        <polygon class="st-on" points="555,148 620,142 625,155 622,172 618,180 555,182 552,168"/>
+        <text x="588" y="165" fill="#7ab07a" font-size="9" font-family="Special Elite,cursive" text-anchor="middle">PA</text>
+        <polygon class="st" points="620,120 668,112 675,125 672,140 660,148 625,150 620,142"/>
+        <text x="645" y="134" fill="#4a7a4a" font-size="8" font-family="Special Elite,cursive" text-anchor="middle">NY</text>
+        <polygon class="st" points="618,178 640,174 644,182 638,192 622,192 618,185"/>
+        <text x="630" y="185" fill="#4a7a4a" font-size="6" font-family="Special Elite,cursive" text-anchor="middle">MD</text>
+        <polygon class="st" points="660,148 672,145 678,158 675,170 665,175 658,165 658,155"/>
+        <text x="666" y="162" fill="#4a7a4a" font-size="6" font-family="Special Elite,cursive" text-anchor="middle">NJ</text>
+        <polygon class="st" points="672,138 688,135 692,145 688,152 672,152 670,145"/>
+        <text x="680" y="146" fill="#4a7a4a" font-size="6" font-family="Special Elite,cursive" text-anchor="middle">CT</text>
+        <polygon class="st" points="692,138 700,136 702,144 698,150 692,148"/>
+        <text x="696" y="145" fill="#4a7a4a" font-size="5" font-family="Special Elite,cursive" text-anchor="middle">RI</text>
+        <polygon class="st-on" points="690,128 730,122 735,130 730,140 700,142 690,140 688,132"/>
+        <text x="710" y="134" fill="#7ab07a" font-size="8" font-family="Special Elite,cursive" text-anchor="middle">MA</text>
+        <polygon class="st" points="668,108 682,106 686,120 682,130 668,132 665,120"/>
+        <text x="675" y="120" fill="#4a7a4a" font-size="6" font-family="Special Elite,cursive" text-anchor="middle">VT</text>
+        <polygon class="st" points="682,106 692,104 695,118 692,130 686,130 682,118"/>
+        <text x="688" y="118" fill="#4a7a4a" font-size="5" font-family="Special Elite,cursive" text-anchor="middle">NH</text>
+        <polygon class="st" points="692,100 718,96 722,112 718,128 700,132 695,118 692,112"/>
+        <text x="706" y="115" fill="#4a7a4a" font-size="7" font-family="Special Elite,cursive" text-anchor="middle">ME</text>
+
+        <!-- ROUTE GLOW -->
+        <path d="
+          M 130,220 C 148,238 168,258 190,272 C 205,276 218,268 230,258
+          Q 248,242 260,232 C 270,224 280,218 290,215 Q 300,212 308,212
+          C 315,224 320,238 326,250 C 330,240 336,222 344,212
+          Q 358,198 372,195 Q 392,192 405,197
+          Q 420,204 432,208 Q 442,204 452,200
+          Q 465,175 478,155 Q 488,140 497,128
+          Q 520,138 540,150 Q 562,158 582,162
+          C 590,160 600,158 608,156
+          Q 620,154 628,152 C 638,150 646,146 654,142
+          Q 664,136 674,130 Q 688,122 700,118
+          Q 712,115 722,114 Q 734,113 742,116
+          C 750,120 756,126 762,131
+        " fill="none" stroke="#f5c842" stroke-width="8" stroke-linecap="round" stroke-linejoin="round" opacity="0.1"/>
+
+        <!-- DAY SEGMENTS (clickable highlight targets) -->
+        <path class="day-segment" data-seg-day="1" d="M 130,220 C 148,238 168,258 190,272 C 205,276 218,268 230,258 Q 248,242 260,232 C 270,224 280,218 290,215 Q 300,212 308,212"
+          fill="none" stroke="var(--d1)" stroke-width="3" stroke-linecap="round" opacity="0.55"/>
+        <path class="day-segment" data-seg-day="2" d="M 308,212 C 315,224 320,238 326,250 C 330,240 336,222 344,212 Q 358,198 372,195 Q 392,192 405,197 Q 420,204 432,208 Q 442,204 452,200"
+          fill="none" stroke="var(--d2)" stroke-width="3" stroke-linecap="round" opacity="0.55"/>
+        <path class="day-segment" data-seg-day="3" d="M 452,200 Q 465,175 478,155 Q 488,140 497,128 Q 520,138 540,150 Q 562,158 582,162"
+          fill="none" stroke="var(--d3)" stroke-width="3" stroke-linecap="round" opacity="0.55"/>
+        <path class="day-segment" data-seg-day="4" d="M 582,162 C 590,160 600,158 608,156 Q 620,154 628,152 C 638,150 646,146 654,142 Q 664,136 674,130 Q 688,122 700,118 Q 712,115 722,114 Q 734,113 742,116 C 750,120 756,126 762,131"
+          fill="none" stroke="var(--d4)" stroke-width="3" stroke-linecap="round" opacity="0.55"/>
+
+        <path id="routePath" d="
+          M 130,220 C 148,238 168,258 190,272 C 205,276 218,268 230,258
+          Q 248,242 260,232 C 270,224 280,218 290,215 Q 300,212 308,212
+          C 315,224 320,238 326,250 C 330,240 336,222 344,212
+          Q 358,198 372,195 Q 392,192 405,197
+          Q 420,204 432,208 Q 442,204 452,200
+          Q 465,175 478,155 Q 488,140 497,128
+          Q 520,138 540,150 Q 562,158 582,162
+          C 590,160 600,158 608,156
+          Q 620,154 628,152 C 638,150 646,146 654,142
+          Q 664,136 674,130 Q 688,122 700,118
+          Q 712,115 722,114 Q 734,113 742,116
+          C 750,120 756,126 762,131
+        " fill="none" stroke="#f5c842" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"
+           stroke-dasharray="1700" stroke-dashoffset="1700" opacity="0.9">
+          <animate attributeName="stroke-dashoffset" from="1700" to="0" dur="3.2s" begin="0.4s" fill="freeze" calcMode="spline" keySplines="0.4 0 0.2 1"/>
+        </path>
+
+        <!-- ─── PINS (clickable, linked to stop cards) ─── -->
+        <!-- Irvine START -->
+        <g class="map-pin-group" data-day="1" data-target="">
+          <g transform="translate(130,220)">
+            <circle class="pin-dot" r="8" style="--base-r:8" fill="#b84c20" stroke="#f0ead8" stroke-width="1.5"/>
+            <text x="0" y="-13" fill="#f0ead8" font-size="9" font-family="Special Elite,cursive" text-anchor="middle">Irvine</text>
+          </g>
+        </g>
+
+        <!-- Yuma Territorial Prison -->
+        <g class="map-pin-group" data-day="1" data-target="stop-yuma">
+          <g transform="translate(163,247)">
+            <circle class="pin-dot" r="4" style="--base-r:4" fill="#4a7fa5" stroke="#f0ead8" stroke-width="1"/>
+            <text x="-9" y="-9" fill="#d4c5a9" font-size="7" font-family="Special Elite,cursive" text-anchor="end">Yuma Prison</text>
+          </g>
+        </g>
+
+        <!-- Tucson -->
+        <g class="map-pin-group" data-day="1" data-target="stop-tucson">
+          <g transform="translate(190,272)">
+            <circle class="pin-dot" r="5" style="--base-r:5" fill="#4a7fa5" stroke="#f0ead8" stroke-width="1.2"/>
+            <text x="16" y="4" fill="#d4c5a9" font-size="8" font-family="Special Elite,cursive">Tucson</text>
+          </g>
+        </g>
+
+        <!-- Roswell UFO Museum -->
+        <g class="map-pin-group" data-day="1" data-target="stop-ufomuseum">
+          <g transform="translate(308,212)">
+            <circle class="pin-dot" r="8" style="--base-r:8" fill="#7a9e7e" stroke="#f0ead8" stroke-width="1.5"/>
+            <text x="12" y="4" fill="#f0ead8" font-size="9" font-family="Special Elite,cursive">Roswell 👽</text>
+          </g>
+        </g>
+
+        <!-- UFO McDonald's (offset slightly from Roswell) -->
+        <g class="map-pin-group" data-day="1" data-target="stop-ufomcd">
+          <g transform="translate(308,224)">
+            <circle class="pin-dot" r="4" style="--base-r:4" fill="#4a7fa5" stroke="#f0ead8" stroke-width="1"/>
+            <text x="10" y="3" fill="#d4c5a9" font-size="6.5" font-family="Special Elite,cursive">UFO McD's</text>
+          </g>
+        </g>
+
+        <!-- Glenrio ghost town -->
+        <g class="map-pin-group" data-day="2" data-target="stop-glenrio">
+          <g transform="translate(326,210)">
+            <circle class="pin-dot" r="4" style="--base-r:4" fill="#4a7fa5" stroke="#f0ead8" stroke-width="1"/>
+            <text x="0" y="-10" fill="#d4c5a9" font-size="6.5" font-family="Special Elite,cursive" text-anchor="middle">Glenrio</text>
+          </g>
+        </g>
+
+        <!-- Amarillo / Cadillac Ranch -->
+        <g class="map-pin-group" data-day="2" data-target="stop-cadillac">
+          <g transform="translate(344,212)">
+            <circle class="pin-dot" r="5" style="--base-r:5" fill="#4a7fa5" stroke="#f0ead8" stroke-width="1.2"/>
+            <text x="0" y="-12" fill="#d4c5a9" font-size="8" font-family="Special Elite,cursive" text-anchor="middle">Amarillo</text>
+          </g>
+        </g>
+
+        <!-- Ozymandias -->
+        <g class="map-pin-group" data-day="2" data-target="stop-ozymandias">
+          <g transform="translate(346,222)">
+            <circle class="pin-dot" r="4" style="--base-r:4" fill="#4a7fa5" stroke="#f0ead8" stroke-width="1"/>
+            <text x="8" y="4" fill="#d4c5a9" font-size="6.5" font-family="Special Elite,cursive">Ozymandias</text>
+          </g>
+        </g>
+
+        <!-- Big Texan (co-located visually with Amarillo cluster) -->
+        <g class="map-pin-group" data-day="2" data-target="stop-bigtexan">
+          <g transform="translate(338,203)">
+            <circle class="pin-dot" r="4" style="--base-r:4" fill="#4a7fa5" stroke="#f0ead8" stroke-width="1"/>
+            <text x="-8" y="-9" fill="#d4c5a9" font-size="6.5" font-family="Special Elite,cursive" text-anchor="end">Big Texan</text>
+          </g>
+        </g>
+
+        <!-- OKC drive-through, small marker -->
+        <g class="map-pin-group" data-day="2" data-target="stop-okcdrivethru">
+          <g transform="translate(432,208)">
+            <circle class="pin-dot" r="4" style="--base-r:4" fill="#4a7fa5" stroke="#f0ead8" stroke-width="1"/>
+            <text x="0" y="-10" fill="#d4c5a9" font-size="7" font-family="Special Elite,cursive" text-anchor="middle">OKC</text>
+          </g>
+        </g>
+
+        <!-- Tulsa NIGHT 2 -->
+        <g class="map-pin-group" data-day="2" data-target="stop-tulsahotel">
+          <g transform="translate(452,200)">
+            <circle class="pin-dot" r="8" style="--base-r:8" fill="#7a9e7e" stroke="#f0ead8" stroke-width="1.5"/>
+            <text x="0" y="-14" fill="#f0ead8" font-size="9" font-family="Special Elite,cursive" text-anchor="middle">Tulsa</text>
+          </g>
+        </g>
+
+        <!-- Springfield IL -->
+        <g class="map-pin-group" data-day="3" data-target="stop-springfieldil">
+          <g transform="translate(478,160)">
+            <circle class="pin-dot" r="4" style="--base-r:4" fill="#4a7fa5" stroke="#f0ead8" stroke-width="1"/>
+            <text x="0" y="-10" fill="#d4c5a9" font-size="7" font-family="Special Elite,cursive" text-anchor="middle">Springfield</text>
+          </g>
+        </g>
+
+        <!-- Chicago prop drop-off (pass-through, not overnight) -->
+        <g class="map-pin-group" data-day="3" data-target="stop-chicagodropoff">
+          <g transform="translate(497,128)">
+            <circle class="pin-dot" r="5" style="--base-r:5" fill="#4a7fa5" stroke="#f0ead8" stroke-width="1.2"/>
+            <text x="0" y="-13" fill="#d4c5a9" font-size="8" font-family="Special Elite,cursive" text-anchor="middle">Chicago</text>
+          </g>
+        </g>
+
+        <!-- Columbus NIGHT 3 -->
+        <g class="map-pin-group" data-day="3" data-target="stop-columbushotel">
+          <g transform="translate(582,162)">
+            <circle class="pin-dot" r="8" style="--base-r:8" fill="#7a9e7e" stroke="#f0ead8" stroke-width="1.5"/>
+            <text x="0" y="-13" fill="#f0ead8" font-size="9" font-family="Special Elite,cursive" text-anchor="middle">Columbus</text>
+          </g>
+        </g>
+
+        <!-- Crystal Cave PA -->
+        <g class="map-pin-group" data-day="4" data-target="stop-crystalcave">
+          <g transform="translate(654,142)">
+            <circle class="pin-dot" r="4" style="--base-r:4" fill="#4a7fa5" stroke="#f0ead8" stroke-width="1"/>
+            <text x="-2" y="-11" fill="#d4c5a9" font-size="7" font-family="Special Elite,cursive" text-anchor="middle">Crystal Cave</text>
+          </g>
+        </g>
+
+        <!-- Delaware Water Gap -->
+        <g class="map-pin-group" data-day="4" data-target="stop-watergap">
+          <g transform="translate(678,128)">
+            <circle class="pin-dot" r="4" style="--base-r:4" fill="#4a7fa5" stroke="#f0ead8" stroke-width="1"/>
+            <text x="9" y="4" fill="#d4c5a9" font-size="7.5" font-family="Special Elite,cursive">Del. Gap</text>
+          </g>
+        </g>
+
+        <!-- Norwood END -->
+        <g class="map-pin-group" data-day="4" data-target="stop-norwood">
+          <g transform="translate(762,131)">
+            <circle class="pin-dot" r="8" style="--base-r:8" fill="#b84c20" stroke="#f0ead8" stroke-width="1.5"/>
+            <text x="0" y="-13" fill="#f0ead8" font-size="9" font-family="Special Elite,cursive" text-anchor="middle">Norwood</text>
+          </g>
+        </g>
+
+        <!-- LEGEND -->
+        <g transform="translate(30,430)">
+          <rect x="0" y="0" width="360" height="36" rx="4" fill="#161814" stroke="#2a3a2a" stroke-width="1"/>
+          <circle cx="16" cy="18" r="6" fill="#b84c20" stroke="#f0ead8" stroke-width="1.2"/>
+          <text x="26" y="22" fill="#d4c5a9" font-size="9" font-family="Special Elite,cursive">Start/End</text>
+          <circle cx="98" cy="18" r="6" fill="#7a9e7e" stroke="#f0ead8" stroke-width="1.2"/>
+          <text x="108" y="22" fill="#d4c5a9" font-size="9" font-family="Special Elite,cursive">Night Stop</text>
+          <circle cx="192" cy="18" r="4" fill="#4a7fa5" stroke="#f0ead8" stroke-width="1"/>
+          <text x="200" y="22" fill="#d4c5a9" font-size="9" font-family="Special Elite,cursive">Attraction</text>
+          <line x1="262" y1="18" x2="282" y2="18" stroke="#f5c842" stroke-width="2.5"/>
+          <text x="286" y="22" fill="#d4c5a9" font-size="9" font-family="Special Elite,cursive">Route</text>
+        </g>
+        <g transform="translate(30,472)">
+          <rect x="0" y="0" width="360" height="28" rx="4" fill="#161814" stroke="#2a3a2a" stroke-width="1"/>
+          <line x1="10" y1="14" x2="30" y2="14" stroke="var(--d1)" stroke-width="3" stroke-linecap="round"/>
+          <text x="34" y="18" fill="#d4c5a9" font-size="8" font-family="Special Elite,cursive">Day 1</text>
+          <line x1="78" y1="14" x2="98" y2="14" stroke="var(--d2)" stroke-width="3" stroke-linecap="round"/>
+          <text x="102" y="18" fill="#d4c5a9" font-size="8" font-family="Special Elite,cursive">Day 2</text>
+          <line x1="146" y1="14" x2="166" y2="14" stroke="var(--d3)" stroke-width="3" stroke-linecap="round"/>
+          <text x="170" y="18" fill="#d4c5a9" font-size="8" font-family="Special Elite,cursive">Day 3 (long)</text>
+          <line x1="246" y1="14" x2="266" y2="14" stroke="var(--d4)" stroke-width="3" stroke-linecap="round"/>
+          <text x="270" y="18" fill="#d4c5a9" font-size="8" font-family="Special Elite,cursive">Day 4</text>
+        </g>
+
+        <text x="480" y="545" fill="#8a7f6e" font-size="9" font-family="Special Elite,cursive" text-anchor="middle">~3,185 miles · 4 days / 3 nights · Leave by 6am on Day 3</text>
+      </svg>
+    </div>
+  </div>
+
+  <!-- GOOGLE MAPS — REAL ROADS -->
+  <div class="gmap-block">
+    <h3 class="gmap-heading">Turn-by-Turn <span>on Real Roads</span></h3>
+    <p class="map-hint" style="margin-bottom:14px;">Switch days to see actual highway routing, terrain, and live traffic</p>
+
+    <div class="gmap-tabs">
+      <button class="gmap-tab active" data-gday="full">Full Trip</button>
+      <button class="gmap-tab" data-gday="1">Day 1</button>
+      <button class="gmap-tab" data-gday="2">Day 2</button>
+      <button class="gmap-tab" data-gday="3">Day 3</button>
+      <button class="gmap-tab" data-gday="4">Day 4</button>
+    </div>
+
+    <div class="gmap-frame-wrap">
+      <iframe
+        id="gmapFrame"
+        class="gmap-iframe"
+        src="https://www.google.com/maps?saddr=Irvine,+CA&daddr=Tucson,+AZ+to:Roswell,+NM+to:Amarillo,+TX+to:Oklahoma+City,+OK+to:Tulsa,+OK+to:Chicago,+IL+to:Columbus,+OH+to:Delaware+Water+Gap,+NJ+to:Norwood,+MA&output=embed"
+        loading="lazy"
+        referrerpolicy="no-referrer-when-downgrade">
+      </iframe>
+    </div>
+
+    <p class="gmap-open-link">
+      <a id="gmapOpenLink" href="https://www.google.com/maps/dir/Irvine,+CA/Tucson,+AZ/Roswell,+NM/Amarillo,+TX/Oklahoma+City,+OK/Tulsa,+OK/Chicago,+IL/Columbus,+OH/Delaware+Water+Gap,+NJ/Norwood,+MA" target="_blank" rel="noopener">
+        Open this route in Google Maps →
+      </a>
+    </p>
+  </div>
+</section>
+
+<!-- PRACTICAL NOTES -->
+<section class="notes-section">
+  <h2 class="notes-heading">Towing <span>Essentials</span></h2>
+  <div class="notes-grid">
+    <div class="note-card warn-card">
+      <span class="note-icon">⛽</span>
+      <div class="note-title">Fuel Budget</div>
+      <div class="note-body">Plan for 8–10 mpg towing. That's roughly $600–800 in fuel coast to coast. Never drop below a quarter tank — especially the stretch between Roswell and Amarillo on Day 2.</div>
+    </div>
+    <div class="note-card warn-card">
+      <span class="note-icon">🛣️</span>
+      <div class="note-title">Speed & Time</div>
+      <div class="note-body">Most states limit towing to 55–60 mph. Add 20–30% to any Google Maps estimate. Day 3 (Tulsa → Chicago → Columbus) is the big one — 1,045 miles and 16-17 hours in a single push. Two drivers trading off is mandatory on Day 3, not optional. Leave by 5-6am that morning.</div>
+    </div>
+    <div class="note-card warn-card">
+      <span class="note-icon">🏨</span>
+      <div class="note-title">Hotel Parking</div>
+      <div class="note-body">Call ahead and confirm a surface lot — not a garage. Ask if a truck towing a 26ft trailer can park overnight. La Quinta, Hampton Inn, and Courtyard properties off interstates are your safest bets. Never book a downtown hotel with a parking structure.</div>
+    </div>
+    <div class="note-card">
+      <span class="note-icon">🎨</span>
+      <div class="note-title">Cadillac Ranch Kit</div>
+      <div class="note-body">Pack two cans of Rustoleum before you leave Irvine. Store them in the trailer. This stop doesn't work without participation — it's the whole point.</div>
+    </div>
+    <div class="note-card">
+      <span class="note-icon">🎵</span>
+      <div class="note-title">The Playlist</div>
+      <div class="note-body">Marty Robbins for AZ/NM. Bob Wills for Texas. Chuck Berry for Missouri. Springsteen for Ohio and PA. Tom Waits for everything in between.</div>
+    </div>
+    <div class="note-card">
+      <span class="note-icon">🔧</span>
+      <div class="note-title">Pre-Trip Check</div>
+      <div class="note-body">Wheel bearings, tire pressure (trailer tires too), brake controller calibration, safety chains. Have a roadside plan that covers trailer breakdowns — AAA Plus RV or Good Sam.</div>
+    </div>
+  </div>
+</section>
+
+<footer>
+  Theatre On Ice National Competition 2026 · Irvine, CA → Norwood, MA · ~3,185 miles · 4 Days / 3 Nights (via Chicago)
+</footer>
+
+<script>
+  // Odometer count-up
+  const odoEl = document.getElementById('odo');
+  const target = 2900;
+  const duration = 2200;
+  const start = performance.now();
+  function easeOut(t) { return 1 - Math.pow(1 - t, 3); }
+  function tick(now) {
+    const elapsed = now - start;
+    const progress = Math.min(elapsed / duration, 1);
+    odoEl.textContent = Math.round(easeOut(progress) * target).toLocaleString();
+    if (progress < 1) requestAnimationFrame(tick);
+  }
+  requestAnimationFrame(tick);
+
+  // ── LIVE TRIP TRACKER ──
+  const tripPlan = [
+    { day: 1, date: "2026-06-28", route: "Irvine → Roswell",              meta: "760 mi · I-10 E → US-285 N · ~11 hrs towing" },
+    { day: 2, date: "2026-06-29", route: "Roswell → Tulsa",                meta: "740 mi · US-70 E → I-40 E → I-44 E · ~11.5 hrs towing" },
+    { day: 3, date: "2026-06-30", route: "Tulsa → Chicago → Columbus",     meta: "1,045 mi · I-44 E → I-55 N → I-90 E → I-80 E → I-71 S · ~16-17 hrs towing — two drivers required" },
+    { day: 4, date: "2026-07-01", route: "Columbus → Norwood",             meta: "640 mi · I-70 E → I-76 E → I-78 E → I-95 N · ~10 hrs towing" }
+  ];
+
+  function ymd(d) {
+    return d.getFullYear() + '-' + String(d.getMonth() + 1).padStart(2, '0') + '-' + String(d.getDate()).padStart(2, '0');
+  }
+
+  function renderTracker() {
+    const todayStr = ymd(new Date());
+    const label = document.getElementById('trackerLabel');
+    const card = document.getElementById('trackerCard');
+    const fill = document.getElementById('trackerFill');
+
+    const firstDate = tripPlan[0].date;
+    const lastDate = tripPlan[tripPlan.length - 1].date;
+    const current = tripPlan.find(d => d.date === todayStr);
+
+    let progressPct = 0;
+    let html = '';
+    card.className = 'tracker-card';
+
+    if (todayStr < firstDate) {
+      const daysOut = Math.round((new Date(firstDate) - new Date(todayStr)) / 86400000);
+      label.textContent = 'Trip Tracker · Not Started Yet';
+      card.classList.add('tracker-not-started');
+      html = `<div class="tracker-msg">Departure is <strong>${daysOut} day${daysOut === 1 ? '' : 's'} away</strong> — Sunday, June 28, 2026. Pack the trailer, check the tires, load the Rustoleum.</div>`;
+      progressPct = 0;
+    } else if (todayStr > lastDate) {
+      label.textContent = 'Trip Tracker · Complete';
+      card.classList.add('tracker-finished');
+      html = `<div class="tracker-msg">🏁 <strong>You made it to Norwood.</strong> 3,185 miles, 4 days, 3 nights, one country. Welcome home.</div>`;
+      progressPct = 100;
+    } else if (current) {
+      label.textContent = `Trip Tracker · Today is Day ${current.day}`;
+      const dateObj = new Date(current.date + 'T00:00:00');
+      const dateLabel = dateObj.toLocaleDateString('en-US', { weekday: 'long', month: 'long', day: 'numeric' });
+      html = `
+        <div class="tracker-day-badge">${current.day}</div>
+        <div class="tracker-info">
+          <div class="tracker-route">${current.route}</div>
+          <div class="tracker-meta">${current.meta}</div>
+          <div class="tracker-date">${dateLabel}</div>
+        </div>
+        <button class="tracker-cta" id="trackerJumpBtn" data-day="${current.day}">View Today's Plan</button>
+      `;
+      progressPct = ((current.day - 1) / (tripPlan.length - 1)) * 100 + (50 / tripPlan.length);
+    } else {
+      // Between travel dates with a gap day, or date doesn't match exactly — find nearest upcoming day
+      const upcoming = tripPlan.find(d => d.date > todayStr);
+      label.textContent = 'Trip Tracker · Rest Day';
+      html = `<div class="tracker-msg">No driving scheduled today. Next leg: <strong>${upcoming ? upcoming.route : 'Norwood'}</strong> coming up.</div>`;
+      const idx = upcoming ? tripPlan.indexOf(upcoming) : tripPlan.length;
+      progressPct = (idx / tripPlan.length) * 100;
+    }
+
+    card.innerHTML = html;
+    fill.style.width = Math.min(100, Math.max(0, progressPct)) + '%';
+
+    const jumpBtn = document.getElementById('trackerJumpBtn');
+    if (jumpBtn) {
+      jumpBtn.addEventListener('click', () => {
+        const day = jumpBtn.dataset.day;
+        if (typeof setActiveDay === 'function') setActiveDay(day);
+        const firstCardOfDay = document.querySelector(`.day-card[data-day="${day}"]`);
+        if (firstCardOfDay) firstCardOfDay.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      });
+    }
+  }
+
+  renderTracker();
+
+  // ── MANUAL STATUS UPDATES (Supabase-backed, shared across all viewers) ──
+  const SUPABASE_URL = 'https://tjnfdnwujzbgxzmzamqn.supabase.co';
+  const SUPABASE_ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InRqbmZkbnd1anpiZ3h6bXphbXFuIiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODI1ODA3MDQsImV4cCI6MjA5ODE1NjcwNH0.xihHF2yqX7Nlsih4zpdC-C46Dklk9Hs20uJ2sSeR9h4';
+  const STATUS_TABLE_URL = `${SUPABASE_URL}/rest/v1/status_updates`;
+  const SUPABASE_HEADERS = {
+    'apikey': SUPABASE_ANON_KEY,
+    'Authorization': `Bearer ${SUPABASE_ANON_KEY}`,
+    'Content-Type': 'application/json'
+  };
+
+  async function fetchStatusLog() {
+    try {
+      const res = await fetch(`${STATUS_TABLE_URL}?select=*&order=created_at.desc&limit=50`, {
+        headers: SUPABASE_HEADERS
+      });
+      if (!res.ok) throw new Error(`Supabase fetch failed: ${res.status}`);
+      return await res.json();
+    } catch (e) {
+      console.warn('Could not load status log:', e);
+      return null; // null = error, distinct from empty array
+    }
+  }
+
+  async function postStatusUpdate(location, note) {
+    const res = await fetch(STATUS_TABLE_URL, {
+      method: 'POST',
+      headers: { ...SUPABASE_HEADERS, 'Prefer': 'return=representation' },
+      body: JSON.stringify([{ location, note: note || null }])
+    });
+    if (!res.ok) throw new Error(`Supabase insert failed: ${res.status}`);
+    return await res.json();
+  }
+
+  async function clearStatusLog() {
+    // delete all rows — id > 0 matches every row since id is an identity column starting at 1
+    const res = await fetch(`${STATUS_TABLE_URL}?id=gt.0`, {
+      method: 'DELETE',
+      headers: SUPABASE_HEADERS
+    });
+    if (!res.ok) throw new Error(`Supabase delete failed: ${res.status}`);
+  }
+
+  function escapeHtml(str) {
+    const div = document.createElement('div');
+    div.textContent = str;
+    return div.innerHTML;
+  }
+
+  async function renderStatusLog() {
+    const logEl = document.getElementById('statusLog');
+    const lastEl = document.getElementById('statusLast');
+    logEl.innerHTML = '<div class="status-entry-empty">Loading updates…</div>';
+
+    const log = await fetchStatusLog();
+
+    if (log === null) {
+      logEl.innerHTML = '<div class="status-entry-empty">Couldn\'t load updates right now. Check connection and try again.</div>';
+      lastEl.textContent = '';
+      return;
+    }
+
+    if (log.length === 0) {
+      logEl.innerHTML = '<div class="status-entry-empty">No updates posted yet.</div>';
+      lastEl.textContent = '';
+      return;
+    }
+
+    // already sorted desc by Supabase query
+    logEl.innerHTML = log.map(entry => {
+      const d = new Date(entry.created_at);
+      const timeLabel = d.toLocaleString('en-US', { weekday: 'short', month: 'short', day: 'numeric', hour: 'numeric', minute: '2-digit' });
+      const noteHtml = entry.note ? `<div class="status-entry-note">${escapeHtml(entry.note)}</div>` : '';
+      return `
+        <div class="status-entry">
+          <div class="status-entry-time">${timeLabel}</div>
+          <div class="status-entry-loc">${escapeHtml(entry.location)}</div>
+          ${noteHtml}
+        </div>
+      `;
+    }).join('');
+
+    const mostRecent = log[0];
+    const recentTime = new Date(mostRecent.created_at).toLocaleString('en-US', { month: 'short', day: 'numeric', hour: 'numeric', minute: '2-digit' });
+    lastEl.innerHTML = `Last update: <strong>${escapeHtml(mostRecent.location)}</strong> (${recentTime})`;
+  }
+
+  const statusToggleBtn = document.getElementById('statusToggleBtn');
+  const statusPanel = document.getElementById('statusPanel');
+  const statusSaveBtn = document.getElementById('statusSaveBtn');
+  const statusClearBtn = document.getElementById('statusClearBtn');
+  const statusLocationInput = document.getElementById('statusLocation');
+  const statusNoteInput = document.getElementById('statusNote');
+
+  statusToggleBtn.addEventListener('click', () => {
+    const isOpen = statusPanel.classList.toggle('open');
+    statusToggleBtn.classList.toggle('active', isOpen);
+    statusToggleBtn.textContent = isOpen ? '📍 Hide Status Panel' : '📍 Post a Status Update';
+  });
+
+  statusSaveBtn.addEventListener('click', async () => {
+    const location = statusLocationInput.value.trim();
+    const note = statusNoteInput.value.trim();
+    if (!location) {
+      statusLocationInput.focus();
+      statusLocationInput.style.borderColor = 'var(--rust)';
+      setTimeout(() => { statusLocationInput.style.borderColor = ''; }, 1200);
+      return;
+    }
+    statusSaveBtn.disabled = true;
+    statusSaveBtn.textContent = 'Posting…';
+    try {
+      await postStatusUpdate(location, note);
+      statusLocationInput.value = '';
+      statusNoteInput.value = '';
+      await renderStatusLog();
+    } catch (e) {
+      console.error(e);
+      alert('Could not post update — check your connection and try again.');
+    } finally {
+      statusSaveBtn.disabled = false;
+      statusSaveBtn.textContent = 'Post Update';
+    }
+  });
+
+  statusClearBtn.addEventListener('click', async () => {
+    if (confirm('Clear all posted status updates for everyone viewing this page? This cannot be undone.')) {
+      try {
+        await clearStatusLog();
+        await renderStatusLog();
+      } catch (e) {
+        console.error(e);
+        alert('Could not clear the log — check your connection and try again.');
+      }
+    }
+  });
+
+  renderStatusLog();
+
+  // Poll every 30s so other viewers' updates show up without a manual refresh
+  setInterval(renderStatusLog, 30000);
+
+
+  document.querySelectorAll('.stop').forEach(stop => {
+    stop.addEventListener('click', (e) => {
+      stop.classList.toggle('expanded');
+      const toggle = stop.querySelector('.stop-toggle');
+      if (toggle) toggle.textContent = stop.classList.contains('expanded') ? '×' : '+';
+    });
+  });
+
+  // ── Day filter ──
+  const filterBtns = document.querySelectorAll('.day-filter-btn');
+  const dayCards = document.querySelectorAll('.day-card');
+  const mapPinGroups = document.querySelectorAll('.map-pin-group');
+  const daySegments = document.querySelectorAll('.day-segment');
+
+  function setActiveDay(day) {
+    filterBtns.forEach(b => b.classList.toggle('active', b.dataset.day === day));
+
+    dayCards.forEach(card => {
+      const show = day === 'all' || card.dataset.day === day;
+      card.classList.toggle('hidden-day', !show);
+    });
+
+    mapPinGroups.forEach(pin => {
+      const show = day === 'all' || pin.dataset.day === day || pin.dataset.day === undefined;
+      pin.style.opacity = show ? '1' : '0.15';
+      pin.style.pointerEvents = show ? 'auto' : 'none';
+    });
+
+    daySegments.forEach(seg => {
+      const show = day === 'all' || seg.dataset.segDay === day;
+      seg.style.opacity = show ? '0.55' : '0.08';
+    });
+  }
+
+  filterBtns.forEach(btn => {
+    btn.addEventListener('click', () => setActiveDay(btn.dataset.day));
+  });
+
+  // ── Map pin click → scroll to + expand + pulse stop card ──
+  mapPinGroups.forEach(pin => {
+    const targetId = pin.dataset.target;
+    if (!targetId) return; // Irvine start pin has no target
+    pin.addEventListener('click', () => {
+      const stopEl = document.getElementById(targetId);
+      if (!stopEl) return;
+
+      // make sure the parent day is visible
+      const parentDay = stopEl.closest('.day-card');
+      if (parentDay && parentDay.classList.contains('hidden-day')) {
+        setActiveDay(parentDay.dataset.day);
+      }
+
+      stopEl.scrollIntoView({ behavior: 'smooth', block: 'center' });
+      stopEl.classList.add('expanded');
+      const toggle = stopEl.querySelector('.stop-toggle');
+      if (toggle) toggle.textContent = '×';
+
+      stopEl.classList.add('pin-active');
+      setTimeout(() => stopEl.classList.remove('pin-active'), 1800);
+
+      // pulse the clicked pin
+      pin.classList.add('pin-pulse');
+      setTimeout(() => pin.classList.remove('pin-pulse'), 2400);
+    });
+  });
+
+  // ── Google Maps embed: day tabs ──
+  const gmapRoutes = {
+    full: {
+      embed: "https://www.google.com/maps?saddr=Irvine,+CA&daddr=Tucson,+AZ+to:Roswell,+NM+to:Amarillo,+TX+to:Oklahoma+City,+OK+to:Tulsa,+OK+to:Chicago,+IL+to:Columbus,+OH+to:Delaware+Water+Gap,+NJ+to:Norwood,+MA&output=embed",
+      open: "https://www.google.com/maps/dir/Irvine,+CA/Tucson,+AZ/Roswell,+NM/Amarillo,+TX/Oklahoma+City,+OK/Tulsa,+OK/Chicago,+IL/Columbus,+OH/Delaware+Water+Gap,+NJ/Norwood,+MA"
+    },
+    "1": {
+      embed: "https://www.google.com/maps?saddr=Irvine,+CA&daddr=Yuma,+AZ+to:Tucson,+AZ+to:Roswell,+NM&output=embed",
+      open: "https://www.google.com/maps/dir/Irvine,+CA/Yuma,+AZ/Tucson,+AZ/Roswell,+NM"
+    },
+    "2": {
+      embed: "https://www.google.com/maps?saddr=Roswell,+NM&daddr=Glenrio,+TX+to:Amarillo,+TX+to:Oklahoma+City,+OK+to:Tulsa,+OK&output=embed",
+      open: "https://www.google.com/maps/dir/Roswell,+NM/Glenrio,+TX/Amarillo,+TX/Oklahoma+City,+OK/Tulsa,+OK"
+    },
+    "3": {
+      embed: "https://www.google.com/maps?saddr=Tulsa,+OK&daddr=Springfield,+IL+to:Chicago,+IL+to:Columbus,+OH&output=embed",
+      open: "https://www.google.com/maps/dir/Tulsa,+OK/Springfield,+IL/Chicago,+IL/Columbus,+OH"
+    },
+    "4": {
+      embed: "https://www.google.com/maps?saddr=Columbus,+OH&daddr=Kutztown,+PA+to:Delaware+Water+Gap,+NJ+to:Norwood,+MA&output=embed",
+      open: "https://www.google.com/maps/dir/Columbus,+OH/Kutztown,+PA/Delaware+Water+Gap,+NJ/Norwood,+MA"
+    }
+  };
+
+  const gmapTabs = document.querySelectorAll('.gmap-tab');
+  const gmapFrame = document.getElementById('gmapFrame');
+  const gmapOpenLink = document.getElementById('gmapOpenLink');
+
+  gmapTabs.forEach(tab => {
+    tab.addEventListener('click', () => {
+      gmapTabs.forEach(t => t.classList.toggle('active', t === tab));
+      const day = tab.dataset.gday;
+      const route = gmapRoutes[day];
+      if (route) {
+        gmapFrame.src = route.embed;
+        gmapOpenLink.href = route.open;
+      }
+      // sync with the itinerary day filter too, when a specific day is picked
+      if (day !== 'full') {
+        setActiveDay(day);
+      } else {
+        setActiveDay('all');
+      }
+    });
+  });
+</script>
+
+</body>
+</html>
