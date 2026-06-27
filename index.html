@@ -833,6 +833,50 @@
   .note-card.warn-card .note-title { color: var(--warn); }
   .note-body { font-size: 13px; color: var(--dust); line-height: 1.5; }
 
+  /* ── TRIP METRICS (fun stats for family/friends) ── */
+  .metric-card {
+    background: #252420;
+    border-radius: 6px;
+    padding: 18px 16px;
+    text-align: center;
+  }
+  .metric-icon { font-size: 24px; margin-bottom: 6px; display: block; }
+  .metric-number {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 34px;
+    color: var(--stripe);
+    line-height: 1;
+    letter-spacing: 0.02em;
+  }
+  .metric-label {
+    font-family: 'Special Elite', cursive;
+    font-size: 11px;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--sky);
+    margin-top: 4px;
+    margin-bottom: 8px;
+  }
+  .metric-body {
+    font-size: 12.5px;
+    color: var(--dust);
+    line-height: 1.45;
+  }
+  .metric-card.metric-wide {
+    grid-column: span 2;
+    text-align: left;
+    display: flex;
+    align-items: center;
+    gap: 16px;
+  }
+  .metric-card.metric-wide .metric-icon { font-size: 30px; margin-bottom: 0; }
+  .metric-card.metric-wide .metric-text { flex: 1; }
+  .metric-card.metric-wide .metric-number { font-size: 26px; }
+
+  @media (max-width: 560px) {
+    .metric-card.metric-wide { grid-column: span 1; flex-direction: column; text-align: center; }
+  }
+
   footer {
     text-align: center;
     padding: 24px;
@@ -877,7 +921,7 @@
 
   <div class="stats-row">
     <div class="stat"><span class="stat-num">3</span><span class="stat-label">Nights</span></div>
-    <div class="stat"><span class="stat-num">11</span><span class="stat-label">States</span></div>
+    <div class="stat"><span class="stat-num">14</span><span class="stat-label">States</span></div>
     <div class="stat"><span class="stat-num">17</span><span class="stat-label">Stops</span></div>
     <div class="stat"><span class="stat-num">796</span><span class="stat-label">Avg mi/day</span></div>
   </div>
@@ -1229,390 +1273,117 @@
 
 </main>
 
-<!-- MAP SECTION -->
+<!-- GOOGLE MAPS -->
 <section class="map-section">
   <div class="map-container">
     <h2 class="notes-heading" style="margin-bottom:8px;">The <span>Route</span></h2>
-    <p class="map-hint" style="margin-bottom:14px;">Click a pin to jump to that stop · use the day filter above to isolate a leg</p>
-    <div class="map-wrap">
-      <svg id="routeMap" viewBox="0 0 960 600" xmlns="http://www.w3.org/2000/svg" style="width:100%;height:auto;display:block;">
-        <defs>
-          <style>
-            .st { fill:#1e2a1e; stroke:#3d5c3d; stroke-width:0.8; }
-            .st-on { fill:#243324; stroke:#4a7a4a; stroke-width:1; }
-          </style>
-        </defs>
-
-        <!-- STATES -->
-        <polygon class="st" points="112,55 175,52 178,68 165,75 155,80 130,82 112,80"/>
-        <text x="143" y="70" fill="#4a7a4a" font-size="8" font-family="Special Elite,cursive" text-anchor="middle">WA</text>
-        <polygon class="st" points="112,80 155,80 158,110 155,140 112,142 108,112"/>
-        <text x="133" y="115" fill="#4a7a4a" font-size="8" font-family="Special Elite,cursive" text-anchor="middle">OR</text>
-        <polygon class="st-on" points="108,142 155,140 160,170 158,200 152,230 145,260 138,285 125,300 112,295 105,270 100,240 98,210 100,180 102,155"/>
-        <text x="127" y="225" fill="#7ab07a" font-size="10" font-family="Special Elite,cursive" text-anchor="middle">CA</text>
-        <polygon class="st" points="155,140 195,135 200,160 198,190 192,215 185,240 158,200 160,170"/>
-        <text x="178" y="185" fill="#4a7a4a" font-size="8" font-family="Special Elite,cursive" text-anchor="middle">NV</text>
-        <polygon class="st" points="175,52 230,48 235,70 232,100 225,120 210,128 195,135 178,68"/>
-        <text x="205" y="88" fill="#4a7a4a" font-size="8" font-family="Special Elite,cursive" text-anchor="middle">ID</text>
-        <polygon class="st" points="230,48 320,42 325,48 322,80 318,98 280,100 255,102 235,70"/>
-        <text x="278" y="72" fill="#4a7a4a" font-size="9" font-family="Special Elite,cursive" text-anchor="middle">MT</text>
-        <polygon class="st" points="322,80 400,76 402,95 400,108 322,108 318,98"/>
-        <text x="361" y="96" fill="#4a7a4a" font-size="8" font-family="Special Elite,cursive" text-anchor="middle">ND</text>
-        <polygon class="st" points="322,108 400,108 402,130 400,148 355,150 322,148"/>
-        <text x="361" y="132" fill="#4a7a4a" font-size="8" font-family="Special Elite,cursive" text-anchor="middle">SD</text>
-        <polygon class="st" points="235,102 318,98 322,108 322,148 255,150 232,148 232,120"/>
-        <text x="278" y="127" fill="#4a7a4a" font-size="8" font-family="Special Elite,cursive" text-anchor="middle">WY</text>
-        <polygon class="st" points="195,135 232,130 232,148 232,180 228,205 200,205 192,215 198,190 200,160"/>
-        <text x="213" y="175" fill="#4a7a4a" font-size="8" font-family="Special Elite,cursive" text-anchor="middle">UT</text>
-        <polygon class="st" points="232,148 322,148 325,185 322,210 228,210 228,205 232,180"/>
-        <text x="278" y="182" fill="#4a7a4a" font-size="8" font-family="Special Elite,cursive" text-anchor="middle">CO</text>
-        <polygon class="st-on" points="192,215 228,210 232,240 230,270 225,295 215,305 200,300 185,285 182,258 185,240"/>
-        <text x="210" y="260" fill="#7ab07a" font-size="9" font-family="Special Elite,cursive" text-anchor="middle">AZ</text>
-        <polygon class="st-on" points="228,210 322,210 325,245 322,285 295,288 270,290 250,288 230,270 232,240"/>
-        <text x="278" y="252" fill="#7ab07a" font-size="9" font-family="Special Elite,cursive" text-anchor="middle">NM</text>
-        <polygon class="st" points="400,76 455,74 460,90 458,112 450,125 440,130 422,132 400,130 400,108 402,95"/>
-        <text x="430" y="105" fill="#4a7a4a" font-size="8" font-family="Special Elite,cursive" text-anchor="middle">MN</text>
-        <polygon class="st" points="322,148 400,148 402,165 398,180 322,180 322,165"/>
-        <text x="361" y="167" fill="#4a7a4a" font-size="8" font-family="Special Elite,cursive" text-anchor="middle">NE</text>
-        <polygon class="st" points="322,180 398,180 400,210 322,210"/>
-        <text x="361" y="198" fill="#4a7a4a" font-size="8" font-family="Special Elite,cursive" text-anchor="middle">KS</text>
-        <polygon class="st" points="400,130 440,130 458,132 462,148 460,165 400,165 400,148"/>
-        <text x="430" y="150" fill="#4a7a4a" font-size="8" font-family="Special Elite,cursive" text-anchor="middle">IA</text>
-        <polygon class="st" points="458,100 490,95 498,105 500,118 495,132 480,138 462,138 458,125 460,112"/>
-        <text x="478" y="120" fill="#4a7a4a" font-size="8" font-family="Special Elite,cursive" text-anchor="middle">WI</text>
-        <polygon class="st" points="498,105 530,100 538,112 535,130 525,138 510,140 498,132 495,120"/>
-        <text x="516" y="122" fill="#4a7a4a" font-size="7" font-family="Special Elite,cursive" text-anchor="middle">MI</text>
-        <polygon class="st-on" points="460,138 480,138 492,145 495,160 492,178 488,198 478,205 462,205 460,185 460,165 462,148"/>
-        <text x="476" y="175" fill="#7ab07a" font-size="8" font-family="Special Elite,cursive" text-anchor="middle">IL</text>
-        <polygon class="st-on" points="400,165 460,165 460,185 462,205 460,218 448,228 438,232 420,228 408,220 400,215 400,195"/>
-        <text x="432" y="198" fill="#7ab07a" font-size="9" font-family="Special Elite,cursive" text-anchor="middle">MO</text>
-        <polygon class="st-on" points="322,210 400,210 400,215 408,220 420,228 438,232 448,228 452,240 420,242 322,242 320,228"/>
-        <text x="385" y="230" fill="#7ab07a" font-size="9" font-family="Special Elite,cursive" text-anchor="middle">OK</text>
-        <polygon class="st" points="448,228 460,218 462,235 460,258 448,262 432,260 420,255 420,242 448,240"/>
-        <text x="440" y="248" fill="#4a7a4a" font-size="8" font-family="Special Elite,cursive" text-anchor="middle">AR</text>
-        <polygon class="st-on" points="295,288 322,288 322,285 322,242 420,242 420,255 432,260 435,278 428,300 418,320 410,340 398,355 385,365 368,370 350,370 330,360 315,345 305,325 295,305"/>
-        <text x="368" y="315" fill="#7ab07a" font-size="11" font-family="Special Elite,cursive" text-anchor="middle">TX</text>
-        <polygon class="st" points="432,260 448,262 460,260 465,275 462,292 450,300 435,298 425,288 428,272"/>
-        <text x="443" y="280" fill="#4a7a4a" font-size="7" font-family="Special Elite,cursive" text-anchor="middle">LA</text>
-        <polygon class="st" points="462,235 475,232 480,248 478,268 472,282 462,288 452,282 450,268 448,250 460,250"/>
-        <text x="465" y="260" fill="#4a7a4a" font-size="7" font-family="Special Elite,cursive" text-anchor="middle">MS</text>
-        <polygon class="st" points="462,218 540,215 548,222 545,235 480,238 462,235"/>
-        <text x="505" y="230" fill="#4a7a4a" font-size="8" font-family="Special Elite,cursive" text-anchor="middle">TN</text>
-        <polygon class="st" points="478,238 545,235 548,258 545,278 530,285 515,288 505,282 498,268 498,250 480,248 478,250"/>
-        <text x="518" y="262" fill="#4a7a4a" font-size="8" font-family="Special Elite,cursive" text-anchor="middle">AL</text>
-        <polygon class="st" points="548,235 572,230 580,248 578,272 568,288 550,295 535,290 528,278 530,258 548,255"/>
-        <text x="556" y="264" fill="#4a7a4a" font-size="8" font-family="Special Elite,cursive" text-anchor="middle">GA</text>
-        <polygon class="st" points="548,295 568,292 578,280 590,295 598,315 602,338 595,350 578,352 562,345 548,328 542,312"/>
-        <text x="568" y="325" fill="#4a7a4a" font-size="8" font-family="Special Elite,cursive" text-anchor="middle">FL</text>
-        <polygon class="st" points="572,215 598,210 608,225 602,240 588,248 572,242 568,232"/>
-        <text x="588" y="230" fill="#4a7a4a" font-size="7" font-family="Special Elite,cursive" text-anchor="middle">SC</text>
-        <polygon class="st" points="548,200 590,195 610,200 615,212 598,215 572,218 548,218 545,208"/>
-        <text x="578" y="210" fill="#4a7a4a" font-size="7" font-family="Special Elite,cursive" text-anchor="middle">NC</text>
-        <polygon class="st" points="548,185 595,178 618,185 620,198 610,205 590,200 548,202 545,195"/>
-        <text x="582" y="194" fill="#4a7a4a" font-size="7" font-family="Special Elite,cursive" text-anchor="middle">VA</text>
-        <polygon class="st" points="545,175 578,170 590,178 595,185 575,188 552,188 545,182"/>
-        <text x="568" y="181" fill="#4a7a4a" font-size="6" font-family="Special Elite,cursive" text-anchor="middle">WV</text>
-        <polygon class="st" points="462,205 545,200 548,212 545,218 480,220 462,218"/>
-        <text x="505" y="213" fill="#4a7a4a" font-size="7" font-family="Special Elite,cursive" text-anchor="middle">KY</text>
-        <polygon class="st-on" points="492,165 520,162 525,178 522,198 518,210 495,212 492,198 492,180"/>
-        <text x="508" y="190" fill="#7ab07a" font-size="8" font-family="Special Elite,cursive" text-anchor="middle">IN</text>
-        <polygon class="st-on" points="520,155 552,150 558,165 558,185 555,200 545,202 522,200 520,182 522,165"/>
-        <text x="538" y="178" fill="#7ab07a" font-size="8" font-family="Special Elite,cursive" text-anchor="middle">OH</text>
-        <polygon class="st-on" points="555,148 620,142 625,155 622,172 618,180 555,182 552,168"/>
-        <text x="588" y="165" fill="#7ab07a" font-size="9" font-family="Special Elite,cursive" text-anchor="middle">PA</text>
-        <polygon class="st" points="620,120 668,112 675,125 672,140 660,148 625,150 620,142"/>
-        <text x="645" y="134" fill="#4a7a4a" font-size="8" font-family="Special Elite,cursive" text-anchor="middle">NY</text>
-        <polygon class="st" points="618,178 640,174 644,182 638,192 622,192 618,185"/>
-        <text x="630" y="185" fill="#4a7a4a" font-size="6" font-family="Special Elite,cursive" text-anchor="middle">MD</text>
-        <polygon class="st" points="660,148 672,145 678,158 675,170 665,175 658,165 658,155"/>
-        <text x="666" y="162" fill="#4a7a4a" font-size="6" font-family="Special Elite,cursive" text-anchor="middle">NJ</text>
-        <polygon class="st" points="672,138 688,135 692,145 688,152 672,152 670,145"/>
-        <text x="680" y="146" fill="#4a7a4a" font-size="6" font-family="Special Elite,cursive" text-anchor="middle">CT</text>
-        <polygon class="st" points="692,138 700,136 702,144 698,150 692,148"/>
-        <text x="696" y="145" fill="#4a7a4a" font-size="5" font-family="Special Elite,cursive" text-anchor="middle">RI</text>
-        <polygon class="st-on" points="690,128 730,122 735,130 730,140 700,142 690,140 688,132"/>
-        <text x="710" y="134" fill="#7ab07a" font-size="8" font-family="Special Elite,cursive" text-anchor="middle">MA</text>
-        <polygon class="st" points="668,108 682,106 686,120 682,130 668,132 665,120"/>
-        <text x="675" y="120" fill="#4a7a4a" font-size="6" font-family="Special Elite,cursive" text-anchor="middle">VT</text>
-        <polygon class="st" points="682,106 692,104 695,118 692,130 686,130 682,118"/>
-        <text x="688" y="118" fill="#4a7a4a" font-size="5" font-family="Special Elite,cursive" text-anchor="middle">NH</text>
-        <polygon class="st" points="692,100 718,96 722,112 718,128 700,132 695,118 692,112"/>
-        <text x="706" y="115" fill="#4a7a4a" font-size="7" font-family="Special Elite,cursive" text-anchor="middle">ME</text>
-
-        <!-- ROUTE GLOW -->
-        <path d="
-          M 130,220 C 148,238 168,258 190,272 C 205,276 218,268 230,258
-          Q 248,242 260,232 C 270,224 280,218 290,215 Q 300,212 308,212
-          C 315,224 320,238 326,250 C 330,240 336,222 344,212
-          Q 358,198 372,195 Q 392,192 405,197
-          Q 420,204 432,208 Q 442,204 452,200
-          Q 465,175 478,155 Q 488,140 497,128
-          Q 520,138 540,150 Q 562,158 582,162
-          C 590,160 600,158 608,156
-          Q 620,154 628,152 C 638,150 646,146 654,142
-          Q 664,136 674,130 Q 688,122 700,118
-          Q 712,115 722,114 Q 734,113 742,116
-          C 750,120 756,126 762,131
-        " fill="none" stroke="#f5c842" stroke-width="8" stroke-linecap="round" stroke-linejoin="round" opacity="0.1"/>
-
-        <!-- DAY SEGMENTS (clickable highlight targets) -->
-        <path class="day-segment" data-seg-day="1" d="M 130,220 C 148,238 168,258 190,272 C 205,276 218,268 230,258 Q 248,242 260,232 C 270,224 280,218 290,215 Q 300,212 308,212"
-          fill="none" stroke="var(--d1)" stroke-width="3" stroke-linecap="round" opacity="0.55"/>
-        <path class="day-segment" data-seg-day="2" d="M 308,212 C 315,224 320,238 326,250 C 330,240 336,222 344,212 Q 358,198 372,195 Q 392,192 405,197 Q 420,204 432,208 Q 442,204 452,200"
-          fill="none" stroke="var(--d2)" stroke-width="3" stroke-linecap="round" opacity="0.55"/>
-        <path class="day-segment" data-seg-day="3" d="M 452,200 Q 465,175 478,155 Q 488,140 497,128 Q 520,138 540,150 Q 562,158 582,162"
-          fill="none" stroke="var(--d3)" stroke-width="3" stroke-linecap="round" opacity="0.55"/>
-        <path class="day-segment" data-seg-day="4" d="M 582,162 C 590,160 600,158 608,156 Q 620,154 628,152 C 638,150 646,146 654,142 Q 664,136 674,130 Q 688,122 700,118 Q 712,115 722,114 Q 734,113 742,116 C 750,120 756,126 762,131"
-          fill="none" stroke="var(--d4)" stroke-width="3" stroke-linecap="round" opacity="0.55"/>
-
-        <path id="routePath" d="
-          M 130,220 C 148,238 168,258 190,272 C 205,276 218,268 230,258
-          Q 248,242 260,232 C 270,224 280,218 290,215 Q 300,212 308,212
-          C 315,224 320,238 326,250 C 330,240 336,222 344,212
-          Q 358,198 372,195 Q 392,192 405,197
-          Q 420,204 432,208 Q 442,204 452,200
-          Q 465,175 478,155 Q 488,140 497,128
-          Q 520,138 540,150 Q 562,158 582,162
-          C 590,160 600,158 608,156
-          Q 620,154 628,152 C 638,150 646,146 654,142
-          Q 664,136 674,130 Q 688,122 700,118
-          Q 712,115 722,114 Q 734,113 742,116
-          C 750,120 756,126 762,131
-        " fill="none" stroke="#f5c842" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"
-           stroke-dasharray="1700" stroke-dashoffset="1700" opacity="0.9">
-          <animate attributeName="stroke-dashoffset" from="1700" to="0" dur="3.2s" begin="0.4s" fill="freeze" calcMode="spline" keySplines="0.4 0 0.2 1"/>
-        </path>
-
-        <!-- ─── PINS (clickable, linked to stop cards) ─── -->
-        <!-- Irvine START -->
-        <g class="map-pin-group" data-day="1" data-target="">
-          <g transform="translate(130,220)">
-            <circle class="pin-dot" r="8" style="--base-r:8" fill="#b84c20" stroke="#f0ead8" stroke-width="1.5"/>
-            <text x="0" y="-13" fill="#f0ead8" font-size="9" font-family="Special Elite,cursive" text-anchor="middle">Irvine</text>
-          </g>
-        </g>
-
-        <!-- Yuma Territorial Prison -->
-        <g class="map-pin-group" data-day="1" data-target="stop-yuma">
-          <g transform="translate(163,247)">
-            <circle class="pin-dot" r="4" style="--base-r:4" fill="#4a7fa5" stroke="#f0ead8" stroke-width="1"/>
-            <text x="-9" y="-9" fill="#d4c5a9" font-size="7" font-family="Special Elite,cursive" text-anchor="end">Yuma Prison</text>
-          </g>
-        </g>
-
-        <!-- Tucson -->
-        <g class="map-pin-group" data-day="1" data-target="stop-tucson">
-          <g transform="translate(190,272)">
-            <circle class="pin-dot" r="5" style="--base-r:5" fill="#4a7fa5" stroke="#f0ead8" stroke-width="1.2"/>
-            <text x="16" y="4" fill="#d4c5a9" font-size="8" font-family="Special Elite,cursive">Tucson</text>
-          </g>
-        </g>
-
-        <!-- Roswell UFO Museum -->
-        <g class="map-pin-group" data-day="1" data-target="stop-ufomuseum">
-          <g transform="translate(308,212)">
-            <circle class="pin-dot" r="8" style="--base-r:8" fill="#7a9e7e" stroke="#f0ead8" stroke-width="1.5"/>
-            <text x="12" y="4" fill="#f0ead8" font-size="9" font-family="Special Elite,cursive">Roswell 👽</text>
-          </g>
-        </g>
-
-        <!-- UFO McDonald's (offset slightly from Roswell) -->
-        <g class="map-pin-group" data-day="1" data-target="stop-ufomcd">
-          <g transform="translate(308,224)">
-            <circle class="pin-dot" r="4" style="--base-r:4" fill="#4a7fa5" stroke="#f0ead8" stroke-width="1"/>
-            <text x="10" y="3" fill="#d4c5a9" font-size="6.5" font-family="Special Elite,cursive">UFO McD's</text>
-          </g>
-        </g>
-
-        <!-- Glenrio ghost town -->
-        <g class="map-pin-group" data-day="2" data-target="stop-glenrio">
-          <g transform="translate(326,210)">
-            <circle class="pin-dot" r="4" style="--base-r:4" fill="#4a7fa5" stroke="#f0ead8" stroke-width="1"/>
-            <text x="0" y="-10" fill="#d4c5a9" font-size="6.5" font-family="Special Elite,cursive" text-anchor="middle">Glenrio</text>
-          </g>
-        </g>
-
-        <!-- Amarillo / Cadillac Ranch -->
-        <g class="map-pin-group" data-day="2" data-target="stop-cadillac">
-          <g transform="translate(344,212)">
-            <circle class="pin-dot" r="5" style="--base-r:5" fill="#4a7fa5" stroke="#f0ead8" stroke-width="1.2"/>
-            <text x="0" y="-12" fill="#d4c5a9" font-size="8" font-family="Special Elite,cursive" text-anchor="middle">Amarillo</text>
-          </g>
-        </g>
-
-        <!-- Ozymandias -->
-        <g class="map-pin-group" data-day="2" data-target="stop-ozymandias">
-          <g transform="translate(346,222)">
-            <circle class="pin-dot" r="4" style="--base-r:4" fill="#4a7fa5" stroke="#f0ead8" stroke-width="1"/>
-            <text x="8" y="4" fill="#d4c5a9" font-size="6.5" font-family="Special Elite,cursive">Ozymandias</text>
-          </g>
-        </g>
-
-        <!-- Big Texan (co-located visually with Amarillo cluster) -->
-        <g class="map-pin-group" data-day="2" data-target="stop-bigtexan">
-          <g transform="translate(338,203)">
-            <circle class="pin-dot" r="4" style="--base-r:4" fill="#4a7fa5" stroke="#f0ead8" stroke-width="1"/>
-            <text x="-8" y="-9" fill="#d4c5a9" font-size="6.5" font-family="Special Elite,cursive" text-anchor="end">Big Texan</text>
-          </g>
-        </g>
-
-        <!-- OKC drive-through, small marker -->
-        <g class="map-pin-group" data-day="2" data-target="stop-okcdrivethru">
-          <g transform="translate(432,208)">
-            <circle class="pin-dot" r="4" style="--base-r:4" fill="#4a7fa5" stroke="#f0ead8" stroke-width="1"/>
-            <text x="0" y="-10" fill="#d4c5a9" font-size="7" font-family="Special Elite,cursive" text-anchor="middle">OKC</text>
-          </g>
-        </g>
-
-        <!-- Tulsa NIGHT 2 -->
-        <g class="map-pin-group" data-day="2" data-target="stop-tulsahotel">
-          <g transform="translate(452,200)">
-            <circle class="pin-dot" r="8" style="--base-r:8" fill="#7a9e7e" stroke="#f0ead8" stroke-width="1.5"/>
-            <text x="0" y="-14" fill="#f0ead8" font-size="9" font-family="Special Elite,cursive" text-anchor="middle">Tulsa</text>
-          </g>
-        </g>
-
-        <!-- Springfield IL -->
-        <g class="map-pin-group" data-day="3" data-target="stop-springfieldil">
-          <g transform="translate(478,160)">
-            <circle class="pin-dot" r="4" style="--base-r:4" fill="#4a7fa5" stroke="#f0ead8" stroke-width="1"/>
-            <text x="0" y="-10" fill="#d4c5a9" font-size="7" font-family="Special Elite,cursive" text-anchor="middle">Springfield</text>
-          </g>
-        </g>
-
-        <!-- Chicago prop drop-off (pass-through, not overnight) -->
-        <g class="map-pin-group" data-day="3" data-target="stop-chicagodropoff">
-          <g transform="translate(497,128)">
-            <circle class="pin-dot" r="5" style="--base-r:5" fill="#4a7fa5" stroke="#f0ead8" stroke-width="1.2"/>
-            <text x="0" y="-13" fill="#d4c5a9" font-size="8" font-family="Special Elite,cursive" text-anchor="middle">Chicago</text>
-          </g>
-        </g>
-
-        <!-- Columbus NIGHT 3 -->
-        <g class="map-pin-group" data-day="3" data-target="stop-columbushotel">
-          <g transform="translate(582,162)">
-            <circle class="pin-dot" r="8" style="--base-r:8" fill="#7a9e7e" stroke="#f0ead8" stroke-width="1.5"/>
-            <text x="0" y="-13" fill="#f0ead8" font-size="9" font-family="Special Elite,cursive" text-anchor="middle">Columbus</text>
-          </g>
-        </g>
-
-        <!-- Crystal Cave PA -->
-        <g class="map-pin-group" data-day="4" data-target="stop-crystalcave">
-          <g transform="translate(654,142)">
-            <circle class="pin-dot" r="4" style="--base-r:4" fill="#4a7fa5" stroke="#f0ead8" stroke-width="1"/>
-            <text x="-2" y="-11" fill="#d4c5a9" font-size="7" font-family="Special Elite,cursive" text-anchor="middle">Crystal Cave</text>
-          </g>
-        </g>
-
-        <!-- Delaware Water Gap -->
-        <g class="map-pin-group" data-day="4" data-target="stop-watergap">
-          <g transform="translate(678,128)">
-            <circle class="pin-dot" r="4" style="--base-r:4" fill="#4a7fa5" stroke="#f0ead8" stroke-width="1"/>
-            <text x="9" y="4" fill="#d4c5a9" font-size="7.5" font-family="Special Elite,cursive">Del. Gap</text>
-          </g>
-        </g>
-
-        <!-- Norwood END -->
-        <g class="map-pin-group" data-day="4" data-target="stop-norwood">
-          <g transform="translate(762,131)">
-            <circle class="pin-dot" r="8" style="--base-r:8" fill="#b84c20" stroke="#f0ead8" stroke-width="1.5"/>
-            <text x="0" y="-13" fill="#f0ead8" font-size="9" font-family="Special Elite,cursive" text-anchor="middle">Norwood</text>
-          </g>
-        </g>
-
-        <!-- LEGEND -->
-        <g transform="translate(30,430)">
-          <rect x="0" y="0" width="360" height="36" rx="4" fill="#161814" stroke="#2a3a2a" stroke-width="1"/>
-          <circle cx="16" cy="18" r="6" fill="#b84c20" stroke="#f0ead8" stroke-width="1.2"/>
-          <text x="26" y="22" fill="#d4c5a9" font-size="9" font-family="Special Elite,cursive">Start/End</text>
-          <circle cx="98" cy="18" r="6" fill="#7a9e7e" stroke="#f0ead8" stroke-width="1.2"/>
-          <text x="108" y="22" fill="#d4c5a9" font-size="9" font-family="Special Elite,cursive">Night Stop</text>
-          <circle cx="192" cy="18" r="4" fill="#4a7fa5" stroke="#f0ead8" stroke-width="1"/>
-          <text x="200" y="22" fill="#d4c5a9" font-size="9" font-family="Special Elite,cursive">Attraction</text>
-          <line x1="262" y1="18" x2="282" y2="18" stroke="#f5c842" stroke-width="2.5"/>
-          <text x="286" y="22" fill="#d4c5a9" font-size="9" font-family="Special Elite,cursive">Route</text>
-        </g>
-        <g transform="translate(30,472)">
-          <rect x="0" y="0" width="360" height="28" rx="4" fill="#161814" stroke="#2a3a2a" stroke-width="1"/>
-          <line x1="10" y1="14" x2="30" y2="14" stroke="var(--d1)" stroke-width="3" stroke-linecap="round"/>
-          <text x="34" y="18" fill="#d4c5a9" font-size="8" font-family="Special Elite,cursive">Day 1</text>
-          <line x1="78" y1="14" x2="98" y2="14" stroke="var(--d2)" stroke-width="3" stroke-linecap="round"/>
-          <text x="102" y="18" fill="#d4c5a9" font-size="8" font-family="Special Elite,cursive">Day 2</text>
-          <line x1="146" y1="14" x2="166" y2="14" stroke="var(--d3)" stroke-width="3" stroke-linecap="round"/>
-          <text x="170" y="18" fill="#d4c5a9" font-size="8" font-family="Special Elite,cursive">Day 3 (long)</text>
-          <line x1="246" y1="14" x2="266" y2="14" stroke="var(--d4)" stroke-width="3" stroke-linecap="round"/>
-          <text x="270" y="18" fill="#d4c5a9" font-size="8" font-family="Special Elite,cursive">Day 4</text>
-        </g>
-
-        <text x="480" y="545" fill="#8a7f6e" font-size="9" font-family="Special Elite,cursive" text-anchor="middle">~3,185 miles · 4 days / 3 nights · Leave by 6am on Day 3</text>
-      </svg>
-    </div>
-  </div>
-
-  <!-- GOOGLE MAPS — REAL ROADS -->
-  <div class="gmap-block">
-    <h3 class="gmap-heading">Turn-by-Turn <span>on Real Roads</span></h3>
     <p class="map-hint" style="margin-bottom:14px;">Switch days to see actual highway routing, terrain, and live traffic</p>
 
-    <div class="gmap-tabs">
-      <button class="gmap-tab active" data-gday="full">Full Trip</button>
-      <button class="gmap-tab" data-gday="1">Day 1</button>
-      <button class="gmap-tab" data-gday="2">Day 2</button>
-      <button class="gmap-tab" data-gday="3">Day 3</button>
-      <button class="gmap-tab" data-gday="4">Day 4</button>
-    </div>
+    <div class="gmap-block" style="margin-top:0; padding-top:0; border-top:none;">
+      <div class="gmap-tabs">
+        <button class="gmap-tab active" data-gday="full">Full Trip</button>
+        <button class="gmap-tab" data-gday="1">Day 1</button>
+        <button class="gmap-tab" data-gday="2">Day 2</button>
+        <button class="gmap-tab" data-gday="3">Day 3</button>
+        <button class="gmap-tab" data-gday="4">Day 4</button>
+      </div>
 
-    <div class="gmap-frame-wrap">
-      <iframe
-        id="gmapFrame"
-        class="gmap-iframe"
-        src="https://www.google.com/maps?saddr=Irvine,+CA&daddr=Tucson,+AZ+to:Roswell,+NM+to:Amarillo,+TX+to:Oklahoma+City,+OK+to:Tulsa,+OK+to:Chicago,+IL+to:Columbus,+OH+to:Delaware+Water+Gap,+NJ+to:Norwood,+MA&output=embed"
-        loading="lazy"
-        referrerpolicy="no-referrer-when-downgrade">
-      </iframe>
-    </div>
+      <div class="gmap-frame-wrap">
+        <iframe
+          id="gmapFrame"
+          class="gmap-iframe"
+          src="https://www.google.com/maps?saddr=Irvine,+CA&daddr=Tucson,+AZ+to:Roswell,+NM+to:Amarillo,+TX+to:Oklahoma+City,+OK+to:Tulsa,+OK+to:Chicago,+IL+to:Columbus,+OH+to:Delaware+Water+Gap,+NJ+to:Norwood,+MA&output=embed"
+          loading="lazy"
+          referrerpolicy="no-referrer-when-downgrade">
+        </iframe>
+      </div>
 
-    <p class="gmap-open-link">
-      <a id="gmapOpenLink" href="https://www.google.com/maps/dir/Irvine,+CA/Tucson,+AZ/Roswell,+NM/Amarillo,+TX/Oklahoma+City,+OK/Tulsa,+OK/Chicago,+IL/Columbus,+OH/Delaware+Water+Gap,+NJ/Norwood,+MA" target="_blank" rel="noopener">
-        Open this route in Google Maps →
-      </a>
-    </p>
+      <p class="gmap-open-link">
+        <a id="gmapOpenLink" href="https://www.google.com/maps/dir/Irvine,+CA/Tucson,+AZ/Roswell,+NM/Amarillo,+TX/Oklahoma+City,+OK/Tulsa,+OK/Chicago,+IL/Columbus,+OH/Delaware+Water+Gap,+NJ/Norwood,+MA" target="_blank" rel="noopener">
+          Open this route in Google Maps →
+        </a>
+      </p>
+    </div>
   </div>
 </section>
 
 <!-- PRACTICAL NOTES -->
 <section class="notes-section">
-  <h2 class="notes-heading">Towing <span>Essentials</span></h2>
+  <h2 class="notes-heading">Trip <span>Metrics</span></h2>
   <div class="notes-grid">
-    <div class="note-card warn-card">
-      <span class="note-icon">⛽</span>
-      <div class="note-title">Fuel Budget</div>
-      <div class="note-body">Plan for 8–10 mpg towing. That's roughly $600–800 in fuel coast to coast. Never drop below a quarter tank — especially the stretch between Roswell and Amarillo on Day 2.</div>
+    <div class="metric-card">
+      <span class="metric-icon">🛣️</span>
+      <div class="metric-number">3,185</div>
+      <div class="metric-label">Total Miles</div>
+      <div class="metric-body">Coast to coast, the long way — through desert, plains, and three time zones.</div>
     </div>
-    <div class="note-card warn-card">
-      <span class="note-icon">🛣️</span>
-      <div class="note-title">Speed & Time</div>
-      <div class="note-body">Most states limit towing to 55–60 mph. Add 20–30% to any Google Maps estimate. Day 3 (Tulsa → Chicago → Columbus) is the big one — 1,045 miles and 16-17 hours in a single push. Two drivers trading off is mandatory on Day 3, not optional. Leave by 5-6am that morning.</div>
+    <div class="metric-card">
+      <span class="metric-icon">🗺️</span>
+      <div class="metric-number">14</div>
+      <div class="metric-label">States Crossed</div>
+      <div class="metric-body">CA, AZ, NM, TX, OK, MO, IL, IN, OH, PA, NJ, NY, CT, and home to MA.</div>
     </div>
-    <div class="note-card warn-card">
-      <span class="note-icon">🏨</span>
-      <div class="note-title">Hotel Parking</div>
-      <div class="note-body">Call ahead and confirm a surface lot — not a garage. Ask if a truck towing a 26ft trailer can park overnight. La Quinta, Hampton Inn, and Courtyard properties off interstates are your safest bets. Never book a downtown hotel with a parking structure.</div>
+    <div class="metric-card">
+      <span class="metric-icon">🕐</span>
+      <div class="metric-number">3</div>
+      <div class="metric-label">Time Zones</div>
+      <div class="metric-body">Pacific → Mountain → Central → Eastern. The clocks jump three times before this trip is over.</div>
     </div>
-    <div class="note-card">
-      <span class="note-icon">🎨</span>
-      <div class="note-title">Cadillac Ranch Kit</div>
-      <div class="note-body">Pack two cans of Rustoleum before you leave Irvine. Store them in the trailer. This stop doesn't work without participation — it's the whole point.</div>
+    <div class="metric-card">
+      <span class="metric-icon">📅</span>
+      <div class="metric-number">4</div>
+      <div class="metric-label">Days on the Road</div>
+      <div class="metric-body">Departing Irvine June 28, arriving Norwood July 1.</div>
     </div>
-    <div class="note-card">
-      <span class="note-icon">🎵</span>
-      <div class="note-title">The Playlist</div>
-      <div class="note-body">Marty Robbins for AZ/NM. Bob Wills for Texas. Chuck Berry for Missouri. Springsteen for Ohio and PA. Tom Waits for everything in between.</div>
+    <div class="metric-card metric-wide">
+      <span class="metric-icon">✈️</span>
+      <div class="metric-text">
+        <div class="metric-number">+14%</div>
+        <div class="metric-label">Longer Than Coast-to-Coast</div>
+        <div class="metric-body">The classic NYC-to-LA drive is about 2,789 miles. This trip is actually longer than driving all the way across the country — and it doesn't even go in a straight line.</div>
+      </div>
     </div>
-    <div class="note-card">
-      <span class="note-icon">🔧</span>
-      <div class="note-title">Pre-Trip Check</div>
-      <div class="note-body">Wheel bearings, tire pressure (trailer tires too), brake controller calibration, safety chains. Have a roadside plan that covers trailer breakdowns — AAA Plus RV or Good Sam.</div>
+    <div class="metric-card">
+      <span class="metric-icon">🌎</span>
+      <div class="metric-number">12.8%</div>
+      <div class="metric-label">Around the Earth</div>
+      <div class="metric-body">Earth's circumference is about 24,901 miles. This trip covers roughly an eighth of the way around the entire planet.</div>
+    </div>
+    <div class="metric-card">
+      <span class="metric-icon">⛽</span>
+      <div class="metric-number">~350</div>
+      <div class="metric-label">Gallons of Fuel</div>
+      <div class="metric-body">Towing a 26ft trailer burns roughly 8-10 mpg — about 350 gallons for the whole trip.</div>
+    </div>
+    <div class="metric-card">
+      <span class="metric-icon">⏱️</span>
+      <div class="metric-number">~49</div>
+      <div class="metric-label">Hours Behind the Wheel</div>
+      <div class="metric-body">That's just over two full days of nonstop driving, spread across four days on the road.</div>
+    </div>
+    <div class="metric-card">
+      <span class="metric-icon">👽</span>
+      <div class="metric-number">2</div>
+      <div class="metric-label">Alien Encounters</div>
+      <div class="metric-body">A museum and a flying-saucer-shaped McDonald's, both in Roswell, NM.</div>
+    </div>
+    <div class="metric-card">
+      <span class="metric-icon">🚗</span>
+      <div class="metric-number">10</div>
+      <div class="metric-label">Cadillacs Buried Nose-First</div>
+      <div class="metric-body">Cadillac Ranch in Amarillo, TX — a Texas panhandle landmark since 1974.</div>
+    </div>
+    <div class="metric-card">
+      <span class="metric-icon">🎭</span>
+      <div class="metric-number">1</div>
+      <div class="metric-label">Theatre On Ice Prop Drop</div>
+      <div class="metric-body">A quick stop in Chicago to drop off show props on the drive home after competing in Irvine.</div>
+    </div>
+    <div class="metric-card">
+      <span class="metric-icon">🏆</span>
+      <div class="metric-number">2026</div>
+      <div class="metric-label">National Competition Year</div>
+      <div class="metric-body">All this driving is for one reason: Theatre On Ice Nationals in Irvine, CA.</div>
     </div>
   </div>
 </section>
@@ -1624,7 +1395,7 @@
 <script>
   // Odometer count-up
   const odoEl = document.getElementById('odo');
-  const target = 2900;
+  const target = 3185;
   const duration = 2200;
   const start = performance.now();
   function easeOut(t) { return 1 - Math.pow(1 - t, 3); }
@@ -1976,8 +1747,6 @@
   // ── Day filter ──
   const filterBtns = document.querySelectorAll('.day-filter-btn');
   const dayCards = document.querySelectorAll('.day-card');
-  const mapPinGroups = document.querySelectorAll('.map-pin-group');
-  const daySegments = document.querySelectorAll('.day-segment');
 
   function setActiveDay(day) {
     filterBtns.forEach(b => b.classList.toggle('active', b.dataset.day === day));
@@ -1986,49 +1755,10 @@
       const show = day === 'all' || card.dataset.day === day;
       card.classList.toggle('hidden-day', !show);
     });
-
-    mapPinGroups.forEach(pin => {
-      const show = day === 'all' || pin.dataset.day === day || pin.dataset.day === undefined;
-      pin.style.opacity = show ? '1' : '0.15';
-      pin.style.pointerEvents = show ? 'auto' : 'none';
-    });
-
-    daySegments.forEach(seg => {
-      const show = day === 'all' || seg.dataset.segDay === day;
-      seg.style.opacity = show ? '0.55' : '0.08';
-    });
   }
 
   filterBtns.forEach(btn => {
     btn.addEventListener('click', () => setActiveDay(btn.dataset.day));
-  });
-
-  // ── Map pin click → scroll to + expand + pulse stop card ──
-  mapPinGroups.forEach(pin => {
-    const targetId = pin.dataset.target;
-    if (!targetId) return; // Irvine start pin has no target
-    pin.addEventListener('click', () => {
-      const stopEl = document.getElementById(targetId);
-      if (!stopEl) return;
-
-      // make sure the parent day is visible
-      const parentDay = stopEl.closest('.day-card');
-      if (parentDay && parentDay.classList.contains('hidden-day')) {
-        setActiveDay(parentDay.dataset.day);
-      }
-
-      stopEl.scrollIntoView({ behavior: 'smooth', block: 'center' });
-      stopEl.classList.add('expanded');
-      const toggle = stopEl.querySelector('.stop-toggle');
-      if (toggle) toggle.textContent = '×';
-
-      stopEl.classList.add('pin-active');
-      setTimeout(() => stopEl.classList.remove('pin-active'), 1800);
-
-      // pulse the clicked pin
-      pin.classList.add('pin-pulse');
-      setTimeout(() => pin.classList.remove('pin-pulse'), 2400);
-    });
   });
 
   // ── Google Maps embed: day tabs ──
